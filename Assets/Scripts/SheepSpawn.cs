@@ -9,6 +9,6 @@ public class SheepSpawn : MonoBehaviour
     public void SheepStart()
     {
         Instantiate(Sheep);
-        Sheep.transform.position = new Vector3(20, 1, 17);
+        Sheep.transform.position = new Vector3(40, 0, 0);
     }
 }
