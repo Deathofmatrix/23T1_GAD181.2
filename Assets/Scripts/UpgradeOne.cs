@@ -21,6 +21,8 @@ public class UpgradeOne : MonoBehaviour
     // if the time of 1 second hasn't passed - do nothing
     // if 1 second has passed then instantiate
 
+
+
     private void Update()
     {
         if(spawnTime < lastSpawn)
