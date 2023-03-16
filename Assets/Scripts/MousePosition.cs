@@ -5,7 +5,8 @@ using UnityEngine;
 public class MousePosition : MonoBehaviour
 {
     public Vector3 screenPosition;
-    public Vector3 worldPosition;
+    public static Vector3 worldPosition;
+    Plane plane = new Plane(Vector3.down, 5);
 
     // Update is called once per frame
     void Update()
@@ -14,9 +15,14 @@ public class MousePosition : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hitData))
+        //if (Physics.Raycast(ray, out RaycastHit hitData))
+        //{
+        //    worldPosition = hitData.point;
+        //}
+
+        if (plane.Raycast(ray, out float distance))
         {
-            worldPosition = hitData.point;
+            worldPosition = ray.GetPoint(distance);
         }
 
     }

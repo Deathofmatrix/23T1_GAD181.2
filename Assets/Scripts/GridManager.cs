@@ -28,11 +28,11 @@ namespace SheepGame.Chonnor
             {
                 for (int x = 0; x < gridArray.GetLength(1); x++)
                 {
-                    Vector3 currentCellPos = GetPosition(z, x) + transform.position;
-                    cell.transform.position = currentCellPos;
-                    cell.transform.localScale = new Vector3(cellSize, 0.1f, cellSize);
-                    cell.name = z + ", " + x;
                     GameObject newCell = Instantiate(cell);
+                    Vector3 currentCellPos = GetPosition(z, x) + transform.position;
+                    newCell.transform.position = currentCellPos;
+                    newCell.transform.localScale = new Vector3(cellSize, 0.1f, cellSize);
+                    newCell.name = z + ", " + x;
                     
                     newCell.transform.parent = this.transform;
                 }
