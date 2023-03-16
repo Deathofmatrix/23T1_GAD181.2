@@ -12,7 +12,7 @@ namespace SheepGame.Chonnor
         public void SheepStart()
         {
             Instantiate(Sheep);
-            Sheep.transform.position = new Vector3(40, 0, 0);
+            Sheep.transform.position = this.transform.position;
         }
     }
 }

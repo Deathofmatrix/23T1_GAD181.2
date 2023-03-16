@@ -15,7 +15,7 @@ namespace SheepGame.Chonnor
         // need bool to check if script is enabled or not
 
         [SerializeField] private GameObject sheepPrefab;
-        private float spawnTime = 0f;
+        [SerializeField] private float spawnTime = 0f;
         private float lastSpawn = 1f;
         // private bool onField = false;
 
@@ -30,8 +30,8 @@ namespace SheepGame.Chonnor
 
             if (spawnTime >= lastSpawn)
             {
+                sheepPrefab.transform.position = this.transform.position ;
                 Instantiate(sheepPrefab);
-                sheepPrefab.transform.position = new Vector3(39, 0, -2);
                 spawnTime = 0f;
             }
         }
