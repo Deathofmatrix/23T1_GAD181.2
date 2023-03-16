@@ -861,6 +861,7 @@ GameObject:
   - component: {fileID: 1160092054}
   - component: {fileID: 1160092058}
   - component: {fileID: 1160092059}
+  - component: {fileID: 1160092060}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Building
@@ -939,7 +940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160092053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.37, y: 5, z: -65.33}
+  m_LocalPosition: {x: -10.14, y: 5, z: -64.49}
   m_LocalScale: {x: 9, y: 9, z: 9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -974,6 +975,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8b32688165d2542af60210fd1e04a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1160092060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160092053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4dbdc4ff9a6ae4697b67e98d00a0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: 
+  isClickIncreaser: 0
+  isSpawnkIncreaser: 0
+  isAdjacencyBonus: 0
+  clickIncrease: 0
+  spawnIncrease: 0
+  adjacencyBonus: 0
 --- !u!1 &1163211755
 GameObject:
   m_ObjectHideFlags: 0

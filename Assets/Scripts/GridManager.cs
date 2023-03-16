@@ -33,6 +33,7 @@ namespace SheepGame.Chonnor
                     newCell.transform.position = currentCellPos;
                     newCell.transform.localScale = new Vector3(cellSize, 0.1f, cellSize);
                     newCell.name = z + ", " + x;
+                    newCell.GetComponent<Cell>().SetCellNumber(z, x);
                     
                     newCell.transform.parent = this.transform;
                 }

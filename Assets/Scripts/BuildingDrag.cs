@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BuildingDrag : MonoBehaviour
+namespace SheepGame.Chonnor
 {
-    //private bool dragging = false;
-    private Vector3 preDragPosition;
-
-    private void OnMouseDrag()
+    public class BuildingDrag : MonoBehaviour
     {
-        //dragging = true;
-        transform.position = MousePosition.worldPosition - preDragPosition;
+        //private bool dragging = false;
+        private Vector3 preDragPosition;
+
+        private void OnMouseDrag()
+        {
+            //dragging = true;
+            transform.position = MousePosition.worldPosition - preDragPosition;
+        }
+        //private void OnMouseUp()
+        //{
+        //    if (dragging)
+        //    {
+        //        preDragPosition = transform.position;
+        //        preDragPosition.y = 0;
+        //        dragging = false;
+        //    }
+        //}
     }
-    //private void OnMouseUp()
-    //{
-    //    if (dragging)
-    //    {
-    //        preDragPosition = transform.position;
-    //        preDragPosition.y = 0;
-    //        dragging = false;
-    //    }
-    //}
+
 }
