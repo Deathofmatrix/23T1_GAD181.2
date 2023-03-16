@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SheepDestroy : MonoBehaviour
+namespace SheepGame.Chonnor
 {
-    public void OnTriggerEnter(Collider other)
+
+    public class SheepDestroy : MonoBehaviour
     {
-        if (other.gameObject.activeSelf)
+        public void OnTriggerEnter(Collider other)
         {
-            Destroy(other.gameObject);
+            if (other.gameObject.activeSelf)
+            {
+                Destroy(other.gameObject);
+            }
+
         }
 
     }
 
 }
-

@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SheepSpawn : MonoBehaviour
-{
-    public GameObject Sheep;
+namespace SheepGame.Chonnor
 
-    public void SheepStart()
+{
+    public class SheepSpawn : MonoBehaviour
     {
-        Instantiate(Sheep);
-        Sheep.transform.position = new Vector3(40, 0, 0);
+        public GameObject Sheep;
+
+        public void SheepStart()
+        {
+            Instantiate(Sheep);
+            Sheep.transform.position = new Vector3(40, 0, 0);
+        }
     }
 }
