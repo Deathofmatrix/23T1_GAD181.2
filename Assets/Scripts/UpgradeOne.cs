@@ -7,7 +7,6 @@ namespace SheepGame.Chonnor
 
     public class UpgradeOne : MonoBehaviour
     {
-
         // need access to sheep prefab
         // need variable for time last sheep
         // need variable for time of next sheep
@@ -17,6 +16,7 @@ namespace SheepGame.Chonnor
         [SerializeField] private GameObject sheepPrefab;
         [SerializeField] private float spawnTime = 0f;
         private float lastSpawn = 1f;
+
         // private bool onField = false;
 
         // instantiate the sheepPrefab every 1 second
