@@ -13,7 +13,7 @@ namespace SheepGame.Chonnor
         [SerializeField] private bool isSpawnkIncreaser;
         [SerializeField] private bool isAdjacencyBonus;
 
-        [SerializeField] private float clickIncrease;
+        [SerializeField] private int clickIncrease;
         [SerializeField] private float spawnIncrease;
         [SerializeField] private float adjacencyBonus;
 
@@ -30,7 +30,7 @@ namespace SheepGame.Chonnor
             return isAdjacencyBonus;
         }
 
-        public float GetBuildingClick()
+        public int GetBuildingClick()
         {
             return clickIncrease;
         }

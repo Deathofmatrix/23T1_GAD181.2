@@ -9,7 +9,7 @@ namespace SheepGame.Chonnor
     {
         public void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.activeSelf)
+            if (other.gameObject.CompareTag("Sheep"))
             {
                 Destroy(other.gameObject);
             }
