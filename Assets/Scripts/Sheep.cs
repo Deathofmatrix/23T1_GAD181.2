@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SheepGame.Chonnor
 {
-    public class SheepMove : MonoBehaviour
+    public class Sheep : MonoBehaviour
     {
 
         [SerializeField] private GameObject barn;
@@ -17,8 +17,12 @@ namespace SheepGame.Chonnor
 
         private void Update()
         {
+            SheepMove();
+        }
+        
+        private void SheepMove()
+        {
             transform.position = Vector3.MoveTowards(transform.position, barn.transform.position, moveSpeed * Time.deltaTime);
         }
-
     }
 }

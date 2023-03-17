@@ -1122,9 +1122,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2091608152}
-        m_TargetAssemblyTypeName: SheepSpawn, Assembly-CSharp
-        m_MethodName: SheepStart
+      - m_Target: {fileID: 2091608158}
+        m_TargetAssemblyTypeName: SheepGame.Chonnor.SheepSpawner, Assembly-CSharp
+        m_MethodName: SheepClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1299,7 +1299,6 @@ GameObject:
   - component: {fileID: 1536507372}
   - component: {fileID: 1536507371}
   - component: {fileID: 1536507370}
-  - component: {fileID: 1536507369}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1307,19 +1306,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1536507369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536507368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7464384e9b75d4cbc31ae2cf3fabd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sheep: {fileID: 1158459064319862175, guid: d117b29149883414ba6b8edcc568fe7f, type: 3}
 --- !u!114 &1536507370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,28 +1584,15 @@ GameObject:
   - component: {fileID: 2091608155}
   - component: {fileID: 2091608154}
   - component: {fileID: 2091608153}
-  - component: {fileID: 2091608152}
   - component: {fileID: 2091608157}
+  - component: {fileID: 2091608158}
   m_Layer: 0
-  m_Name: Sheep Start
+  m_Name: Sheep Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2091608152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091608151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7464384e9b75d4cbc31ae2cf3fabd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sheep: {fileID: 1158459064319862175, guid: d117b29149883414ba6b8edcc568fe7f, type: 3}
 --- !u!65 &2091608153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1705,7 +1678,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091608151}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c54269a8fc4bd24c870098782febd5d, type: 3}
   m_Name: 
@@ -1713,6 +1686,19 @@ MonoBehaviour:
   sheepPrefab: {fileID: 1158459064319862175, guid: d117b29149883414ba6b8edcc568fe7f,
     type: 3}
   spawnTime: 0
+--- !u!114 &2091608158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091608151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab709f01f5e0184f9d76a502afeb658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sheep: {fileID: 1158459064319862175, guid: d117b29149883414ba6b8edcc568fe7f, type: 3}
 --- !u!1001 &2968903332355964374
 PrefabInstance:
   m_ObjectHideFlags: 0
