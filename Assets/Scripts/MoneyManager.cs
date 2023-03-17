@@ -13,21 +13,15 @@ namespace SheepGame.Chonnor
         // References to gameObjects which need to talk to it
         private TMP_Text moneyUI;
 
-        private void Start()
-        {
-            // at the start of the game the currentMoney value is determined to be the value of money, which is ‘i’ plus the current money value
-            currentMoney = money + currentMoney;
-
-        }
-
-
         public void MoneyCount()
         {
-            currentMoney += money;
+            // GridManager.totalBonus += money;
+
         }
 
         public void Update()
         {
+            currentMoney = money;
             moneyUI.SetText(currentMoney.ToString());
         }
 
