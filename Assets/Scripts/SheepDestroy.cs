@@ -8,6 +8,7 @@ namespace SheepGame.Chonnor
     public class SheepDestroy : MonoBehaviour
     {
         public LayerMask SheepLayer;
+        public MoneyManager MoneyManager;
 
         public void OnTriggerEnter(Collider other)
         {
@@ -19,6 +20,8 @@ namespace SheepGame.Chonnor
             {
                 Destroy(other.gameObject);
             }
+
+            MoneyManager.MoneyCount();
 
         }
 
