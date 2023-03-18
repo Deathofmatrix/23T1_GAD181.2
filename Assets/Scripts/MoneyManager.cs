@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 namespace SheepGame.Chonnor
 {
@@ -11,18 +12,39 @@ namespace SheepGame.Chonnor
         public static int money;
         private int currentMoney;
         // References to gameObjects which need to talk to it
-        private TMP_Text moneyUI;
+        [SerializeField] private TMP_Text moneyUI;
+
+        private void Start()
+        {
+            currentMoney = 0;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("White Sheep"))
+
+            {
+                money = 1;
+                MoneyCount();
+            }
+
+            else if (other.gameObject.CompareTag("Black Sheep"))
+            {
+                money = 5;
+                MoneyCount();
+            }
+        }
 
         public void MoneyCount()
         {
-            // GridManager.totalBonus += money;
-
+            
+            currentMoney += money;
         }
 
         public void Update()
         {
-            currentMoney = money;
-            moneyUI.SetText(currentMoney.ToString());
+            
+            moneyUI.SetText(money.ToString());
         }
 
     }

@@ -7,11 +7,13 @@ TagManager:
   - Sheep
   - Cell
   - Building
+  - Black Sheep
+  - White Sheep
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Sheep Layer
   - Water
   - UI
   - 

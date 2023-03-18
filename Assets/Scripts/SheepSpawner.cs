@@ -23,7 +23,7 @@ namespace SheepGame.Chonnor
 
         public void SheepClick()
         {
-            if (clickAmount == 0)
+            if (clickAmount <= 0)
             {
                 Debug.LogWarning("Click equals zero!!!");
             }
@@ -32,7 +32,9 @@ namespace SheepGame.Chonnor
             {
                 for (int i = 0; i < clickAmount; i++)
                 {
+                    
                     SheepSpawn(Color.white);
+                    
                 }
             }
             else if (clickAmount < 25)
@@ -40,6 +42,7 @@ namespace SheepGame.Chonnor
                 for (int i = 0; i < clickAmount / 5; i++)
                 {
                     SheepSpawn(Color.black);
+                    
                 }
             }
             else if (clickAmount < 125)
@@ -60,6 +63,9 @@ namespace SheepGame.Chonnor
             mRend.material.color = colour;
 
         }
+
+
+
         public void RandomSheepPos()
         {
             sheepSpawnPosition.z = Random.Range(this.transform.position.z - 2.7f, this.transform.position.z + 2.7f);

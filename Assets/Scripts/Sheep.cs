@@ -12,7 +12,12 @@ namespace SheepGame.Chonnor
 
         private void Start()
         {
-            gameObject.tag = "Sheep";
+            moveSpeed = 6;
+
+            int SheepLayer = LayerMask.NameToLayer("Sheep Layer");
+
+            gameObject.layer = SheepLayer;
+
         }
 
         private void Update()
