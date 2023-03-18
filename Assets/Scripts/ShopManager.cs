@@ -9,7 +9,7 @@ namespace SheepGame.Chonnor
 
     public class ShopManager : MonoBehaviour
     {
-        [SerializeField] Canvas shopCanvas;
+        [SerializeField] private Canvas shopCanvas;
         public Button upragdeOne, upgradeTwo, upgradeThree;
         
 
