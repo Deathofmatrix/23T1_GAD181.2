@@ -37,18 +37,18 @@ namespace SheepGame.Chonnor
         // Update is called once per frame
         void Update()
         {
-            if(MoneyManager.currentMoney >= 10)
+            if(MoneyManager.currentMoney >= 50)
             {
                 upgradeOne.enabled = true;
             }
             // if money counter is higher than 10 then enable)
-            if(MoneyManager.currentMoney >= 50)
+            if(MoneyManager.currentMoney >= 100)
             {
                 upgradeTwo.enabled = true;
             }
             // if money counter is higher than 50 then enable)
 
-            if(MoneyManager.currentMoney >= 100)
+            if(MoneyManager.currentMoney >= 500)
             {
                 upgradeThree.enabled = true;
             }
@@ -68,8 +68,9 @@ namespace SheepGame.Chonnor
 
         public void UpgradeOne()
         {
+            //if()
             Instantiate(clickPlusOne);
-
+            MoneyManager.currentMoney -= 10;
         }
     }
 }
