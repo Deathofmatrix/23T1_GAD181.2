@@ -4,20 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace SheepGame.Chonnor
 {
 
     public class ShopManager : MonoBehaviour
     {
+        private Vector3 buildingPos;
         [SerializeField] private Canvas shopCanvas;
-        public Button upragdeOne, upgradeTwo, upgradeThree;
-        
-
+        public Button upgradeOne, upgradeTwo, upgradeThree;
+        [SerializeField] private MoneyManager moneyManager;
+        [SerializeField] private GameObject clickPlusOne;
 
         void Start()
         {
-
-            upragdeOne.enabled = false;
+            shopCanvas.enabled = false;
+            upgradeOne.enabled = false;
             upgradeTwo.enabled = false;
             upgradeThree.enabled = false;
         }
@@ -37,27 +39,37 @@ namespace SheepGame.Chonnor
         {
             if(MoneyManager.currentMoney >= 10)
             {
-                enabled = true;
+                upgradeOne.enabled = true;
             }
             // if money counter is higher than 10 then enable)
             if(MoneyManager.currentMoney >= 50)
             {
-                enabled = true;
+                upgradeTwo.enabled = true;
             }
             // if money counter is higher than 50 then enable)
 
             if(MoneyManager.currentMoney >= 100)
             {
-                enabled = true;
+                upgradeThree.enabled = true;
             }
             // if money counter is higher than 100 then enable)
 
         }
-
+        
+        public void BuildingGetTest()
+        {
+            
+            Vector3 mousepos = Input.mousePosition;
+            mousepos.x = -2.0f;
+            buildingPos = Camera.main.ScreenToWorldPoint(mousepos);
+            Instantiate(clickPlusOne, buildingPos, Quaternion.identity);
+            
+        }
 
         public void UpgradeOne()
         {
-            Instantiate(upragdeOne);
+            Instantiate(clickPlusOne);
+
         }
     }
 }
