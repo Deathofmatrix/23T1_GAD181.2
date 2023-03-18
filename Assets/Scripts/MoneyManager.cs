@@ -8,8 +8,8 @@ namespace SheepGame.Chonnor
 {
     public class MoneyManager : MonoBehaviour
     {
-        public static int money;
-        private int currentMoney;
+        private int money;
+        public static int currentMoney;
         [SerializeField] private TMP_Text moneyUI;
 
         private void Start()
@@ -25,15 +25,16 @@ namespace SheepGame.Chonnor
             {
                 money = 1;
                 MoneyCount();
+                money = 0;
             }
 
             else if (other.gameObject.CompareTag("Black Sheep"))
             {
                 money = 5;
                 MoneyCount();
+                money = 0;
             }
 
-            else money = 0;
         }
 
         public void MoneyCount()
@@ -43,7 +44,7 @@ namespace SheepGame.Chonnor
 
         public void Update()
         {
-                       
+                          
             moneyUI.SetText(currentMoney.ToString());
         }
 
