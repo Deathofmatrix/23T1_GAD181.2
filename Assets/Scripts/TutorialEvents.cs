@@ -103,42 +103,23 @@ public class TutorialEvents : MonoBehaviour
 
     private void Update()
     {
-        
-        if (moneyUp == null)
-        {
-            return;
-        }
-        else if (MoneyManager.currentMoney >= 1)
+
+         if (MoneyManager.currentMoney >= 1)
         {
             MoneyUp();
         }
         
-
-        if (tryShop == null)
-        {
-            return;
-        }
-        else if(MoneyManager.currentMoney >= 10)
+        if(MoneyManager.currentMoney >= 10)
         {
             TryShop();
         }
 
-        
-        if(enoughmoney == null)
-        {
-            return;
-        }
-        else if(MoneyManager.currentMoney >= 50)
+         if(MoneyManager.currentMoney >= 50)
         {
             EnoughMoney();
         }
 
-
-        if (dragNDrop == null)
-        {
-            return;
-        }
-        else if (MoneyManager.currentMoney >= 50 && Input.GetButtonDown("Upgrade One"))
+         if (MoneyManager.currentMoney >= 50 && Input.GetButtonDown("Upgrade One"))
         {
             DragAndDrop();
         }
