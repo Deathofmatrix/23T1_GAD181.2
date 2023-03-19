@@ -8,15 +8,12 @@ public class TutorialEvents : MonoBehaviour
 {
 
     private float waitTime = 3f;
+    private float dragWaitTime = 6f;
 
     public Button upgradeOne;
 
-    [SerializeField] private Image tryButton;
-    [SerializeField] private Image watchSheep;
-    [SerializeField] private Image moneyUp;
-    [SerializeField] private Image tryShop;
-    [SerializeField] private Image enoughmoney;
-    [SerializeField] private Image dragNDrop;
+    [SerializeField] private Image tryButton, watchSheep, moneyUp, tryShop, enoughmoney, dragNDrop;
+   // [SerializeField] private Image tryClicking;
 
     private void Start()
     {
@@ -28,18 +25,56 @@ public class TutorialEvents : MonoBehaviour
         tryShop.enabled = false;
         enoughmoney.enabled = false;
         dragNDrop.enabled = false;
+
+       // tryClicking.enabled = false;
+
     }
 
     private void Awake()
     {
         tryButton.enabled = true;
-    } 
+    }
 
     public void WatchSheep()
     {
-        watchSheep.enabled = true;
-
+        if (watchSheep != null)
+        {
+            return;
+        }
+            
+        else
+        {
+            Destroy(watchSheep);
+        }
     }
+
+    /*public void TryClicking()
+    {
+        tryClicking.enabled = true;
+    }*/
+
+    public void MoneyUp()
+    {
+        moneyUp.enabled = true;
+    }
+
+    public void TryShop()
+    {
+        tryShop.enabled = true;
+    }
+
+    public void EnoughMoney()
+    {
+        enoughmoney.enabled = true;
+    }
+
+    public void DragAndDrop()
+    {
+        dragNDrop.enabled = true;
+    }
+
+
+
     IEnumerator ScreenTime()
     {
         yield return new WaitForSecondsRealtime(waitTime);
@@ -47,24 +82,24 @@ public class TutorialEvents : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(waitTime);
         watchSheep.enabled = false;
+
+
+        yield return new WaitForSecondsRealtime(waitTime);
+        moneyUp.enabled = false;
+
+        yield return new WaitForSecondsRealtime(waitTime);
+        tryShop.enabled=false;
+
+        yield return new WaitForSecondsRealtime(waitTime);
+        enoughmoney.enabled = false;
+
+        //yield return new WaitForSecondsRealtime(waitTime);
+        //tryClicking.enabled = false;
+
+        yield return new WaitForSeconds(dragWaitTime);
+        dragNDrop.enabled=false;
     }
 
-    public void DestroyMoneyUp()
-    {
-        Destroy(moneyUp); 
-    }
-    public void DestroyTryShop()
-    {
-        Destroy(tryShop);
-    }
-    public void DestroyEnoughMoney()
-    {
-        Destroy(enoughmoney);
-    }
-    public void DestroyDragNDrop()
-    {
-        Destroy(dragNDrop);
-    }
 
     private void Update()
     {
@@ -75,7 +110,7 @@ public class TutorialEvents : MonoBehaviour
         }
         else if (MoneyManager.currentMoney >= 1)
         {
-            moneyUp.enabled = true;
+            MoneyUp();
         }
         
 
@@ -85,7 +120,7 @@ public class TutorialEvents : MonoBehaviour
         }
         else if(MoneyManager.currentMoney >= 10)
         {
-            tryShop.enabled = true;
+            TryShop();
         }
 
         
@@ -95,7 +130,7 @@ public class TutorialEvents : MonoBehaviour
         }
         else if(MoneyManager.currentMoney >= 50)
         {
-            enoughmoney.enabled = true;
+            EnoughMoney();
         }
 
 
@@ -105,7 +140,7 @@ public class TutorialEvents : MonoBehaviour
         }
         else if (MoneyManager.currentMoney >= 50 && Input.GetButtonDown("Upgrade One"))
         {
-            dragNDrop.enabled = true;
+            DragAndDrop();
         }
     }
 }
