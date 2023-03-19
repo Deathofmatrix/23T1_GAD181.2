@@ -16,7 +16,7 @@ public class TutorialEvents : MonoBehaviour
 
     // public Button upgradeOne;
 
-    [SerializeField] private Image tryButton, watchSheep, moneyUp, tryShop, enoughMoney, dragNDrop;
+    [SerializeField] private Image tryButton, watchSheep, moneyUp, tryShop, enoughMoney; //dragNDrop;
     // [SerializeField] private Image tryClicking;
 
     private void Start()
@@ -115,12 +115,11 @@ public class TutorialEvents : MonoBehaviour
         enoughMoney.enabled = false;
     }
 
-    IEnumerator ScreenTimeFive()
-    {
-        yield return new WaitForSeconds(dragWaitTime);
-        dragNDrop.enabled = false;
-
-    }
+//    IEnumerator ScreenTimeFive()
+//    {
+//        yield return new WaitForSeconds(dragWaitTime);
+//        dragNDrop.enabled = false;
+//    }
     private void Update()
     {
 
