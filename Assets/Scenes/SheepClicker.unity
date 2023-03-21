@@ -1055,7 +1055,7 @@ PrefabInstance:
     - target: {fileID: 307151123421575875, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
       propertyPath: clickIncrease
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 307151123421575878, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
@@ -1253,7 +1253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &595283419
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1354,13 +1354,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b67ecf03d0a29341a0d87af755c0f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeOne: {fileID: 1862925041}
   tryButton: {fileID: 1319733428}
   watchSheep: {fileID: 2017204698}
   moneyUp: {fileID: 2088137342}
   tryShop: {fileID: 1629590496}
   enoughMoney: {fileID: 2143890754}
-  dragNDrop: {fileID: 1906227730}
 --- !u!1 &643270650
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,6 +2733,7 @@ MonoBehaviour:
   width: 3
   depth: 3
   cellSize: 10
+  clickLevel: 1
 --- !u!4 &1587071684
 Transform:
   m_ObjectHideFlags: 0
@@ -3855,7 +3854,7 @@ Transform:
   m_GameObject: {fileID: 2091608151}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 13.885, y: -9.7848425, z: 15.527}
-  m_LocalScale: {x: 1, y: 1, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 751931406}
@@ -3972,6 +3971,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 307151123421575875, guid: f3d1f9974671e014f9c5710b6dc45476,
+        type: 3}
+      propertyPath: clickIncrease
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 307151123421575878, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
       propertyPath: m_RootOrder
@@ -3980,7 +3984,7 @@ PrefabInstance:
     - target: {fileID: 307151123421575878, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.14
+      value: 1.3100004
       objectReference: {fileID: 0}
     - target: {fileID: 307151123421575878, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
@@ -3990,7 +3994,7 @@ PrefabInstance:
     - target: {fileID: 307151123421575878, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -64.49
+      value: -63.469997
       objectReference: {fileID: 0}
     - target: {fileID: 307151123421575878, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}

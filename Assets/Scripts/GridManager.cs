@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace SheepGame.Chonnor
@@ -14,6 +15,8 @@ namespace SheepGame.Chonnor
         //depth == x
         [SerializeField] private int cellSize;
         [SerializeField] private int[,] gridArray;
+
+        [SerializeField] private int clickLevel = 1;
 
         private void Start()
         {
@@ -42,6 +45,51 @@ namespace SheepGame.Chonnor
         private Vector3 GetPosition(int z, int x)
         {
             return new Vector3(z, 0, x) * cellSize;
+        }
+
+        public void SetClickLevel(int click, bool isPositive)
+        {
+            if (isPositive)
+            {
+                clickLevel += click;
+                if (clickLevel < 5)
+                {
+                    SheepSpawner.clickAmount = Remainder();
+                }
+                else if (clickLevel < 9)
+                {
+                    SheepSpawner.clickAmount = Remainder() * 5;
+                }
+                else if (clickLevel < 13)
+                {
+                    SheepSpawner.clickAmount = Remainder() * 25;
+                }
+            }
+            else if (!isPositive)
+            {
+                clickLevel -= click;
+                if (clickLevel < 5)
+                {
+                    SheepSpawner.clickAmount = Remainder();
+                }
+                else if (clickLevel < 9)
+                {
+                    SheepSpawner.clickAmount = Remainder() * 5;
+                }
+                else if (clickLevel < 13)
+                {
+                    SheepSpawner.clickAmount = Remainder() * 25;
+                }
+            }
+        }
+        private int Remainder()
+        {
+            int remainder = clickLevel % 4;
+            if (remainder == 0)
+            {
+                remainder = 4;
+            }
+            return remainder;
         }
     }
 }

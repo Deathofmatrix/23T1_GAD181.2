@@ -69,7 +69,7 @@ namespace SheepGame.Chonnor
 
         public void RandomSheepPos()
         {
-            sheepSpawnPosition.z = Random.Range(this.transform.position.z - 2.7f, this.transform.position.z + 2.7f);
+            sheepSpawnPosition.z = Random.Range(this.transform.position.z - 3.2f, this.transform.position.z + 3.2f);
         }
 
     }

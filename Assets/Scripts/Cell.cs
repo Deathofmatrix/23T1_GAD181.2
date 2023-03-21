@@ -10,7 +10,7 @@ namespace SheepGame.Chonnor
     public class Cell : MonoBehaviour
     {
         [SerializeField] private Vector2 cellNumber;
-        [SerializeField] private GameObject gManager;
+        [SerializeField] private GridManager gManager;
 
         private int colliderInTrigger;
         private Rigidbody buildingRB;
@@ -27,7 +27,7 @@ namespace SheepGame.Chonnor
 
         private void Start()
         {
-            gManager = GameObject.Find("Grid");
+            gManager = GameObject.Find("Grid").GetComponent<GridManager>();
             FindAdjacent();
         }
         private void OnTriggerStay(Collider other)
@@ -50,7 +50,8 @@ namespace SheepGame.Chonnor
                 building = other.GetComponent<BuildingType>();
                 if (building.GetBuildingClickStatus())
                 {
-                    SheepSpawner.clickAmount += building.GetBuildingClick();
+                    gManager.SetClickLevel(building.GetBuildingClick(), true);
+                    //SheepSpawner.clickAmount += building.GetBuildingClick();
                 }
             }
         }
@@ -62,7 +63,8 @@ namespace SheepGame.Chonnor
             {
                 if (building.GetBuildingClickStatus())
                 {
-                    SheepSpawner.clickAmount -= building.GetBuildingClick();
+                    gManager.SetClickLevel(building.GetBuildingClick(), false);
+                    //SheepSpawner.clickAmount -= building.GetBuildingClick();
                     building = null;
                 }
             }
