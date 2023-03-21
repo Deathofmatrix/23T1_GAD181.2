@@ -11,6 +11,8 @@ namespace SheepGame.Chonnor
     public class ShopManager : MonoBehaviour
     {
         private Vector3 buildingPos;
+        public Transform spawnPoint;
+        private GameObject shopPoint;
         [SerializeField] private Canvas shopCanvas;
         public Button upgradeOne, upgradeTwo, upgradeThree;
         [SerializeField] private MoneyManager moneyManager;
@@ -56,21 +58,11 @@ namespace SheepGame.Chonnor
 
         }
         
-        public void BuildingGetTest()
-        {
-            
-            Vector3 mousepos = Input.mousePosition;
-            mousepos.x = -2.0f;
-            buildingPos = Camera.main.ScreenToWorldPoint(mousepos);
-            Instantiate(clickPlusOne, buildingPos, Quaternion.identity);
-            
-        }
-
         public void UpgradeOne()
         {
-            //if()
-            Instantiate(clickPlusOne);
-            MoneyManager.currentMoney -= 10;
+            Instantiate(clickPlusOne, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            
+            MoneyManager.currentMoney -= 50;
         }
     }
 }

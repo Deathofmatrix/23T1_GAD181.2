@@ -9,6 +9,7 @@ TagManager:
   - Building
   - Black Sheep
   - White Sheep
+  - Red Sheep
   layers:
   - Default
   - TransparentFX

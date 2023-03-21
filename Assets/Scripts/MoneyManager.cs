@@ -35,6 +35,13 @@ namespace SheepGame.Chonnor
                 money = 0;
             }
 
+            else if(other.gameObject.CompareTag("Red Sheep"))
+            {
+                money = 25;
+                MoneyCount();
+                money = 0;
+            }
+
         }
 
         public void MoneyCount()

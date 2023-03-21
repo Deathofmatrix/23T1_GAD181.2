@@ -12,11 +12,12 @@ public class TutorialEvents : MonoBehaviour
     private bool alreadyShownOne = false;
     private bool alreadyShownTwo = false;
     private bool alreadyShownThree = false;
-    // private bool alreadyShownFour = false;
+    private bool alreadyShownFour = false;
 
     // public Button upgradeOne;
 
-    [SerializeField] private Image tryButton, watchSheep, moneyUp, tryShop, enoughMoney; //dragNDrop;
+    [SerializeField] private Image tryButton, watchSheep, moneyUp, tryShop, enoughMoney;
+    [SerializeField] private Image dragNDrop;
     // [SerializeField] private Image tryClicking;
 
     private void Start()
@@ -27,8 +28,7 @@ public class TutorialEvents : MonoBehaviour
         moneyUp.enabled = false;
         tryShop.enabled = false;
         enoughMoney.enabled = false;
-        
-        // dragNDrop.enabled = false;
+        dragNDrop.enabled = false;
         // tryClicking.enabled = false;
 
     }
@@ -74,12 +74,12 @@ public class TutorialEvents : MonoBehaviour
         StartCoroutine(ScreenTimeFour());
     }
 
-    //public void DragAndDrop()
-    //{
-      //  dragNDrop.enabled = true;
-        //alreadyShownFour = true;
-        //StartCoroutine(ScreenTimeFive());
-    //}
+    public void DragAndDrop()
+    {
+        dragNDrop.enabled = true;
+        alreadyShownFour = true;
+        StartCoroutine(ScreenTimeFive());
+    }
 
 
 
@@ -115,11 +115,12 @@ public class TutorialEvents : MonoBehaviour
         enoughMoney.enabled = false;
     }
 
-//    IEnumerator ScreenTimeFive()
-//    {
-//        yield return new WaitForSeconds(dragWaitTime);
-//        dragNDrop.enabled = false;
-//    }
+    IEnumerator ScreenTimeFive()
+    {
+        yield return new WaitForSeconds(dragWaitTime);
+        dragNDrop.enabled = false;
+    }
+
     private void Update()
     {
 
@@ -141,9 +142,9 @@ public class TutorialEvents : MonoBehaviour
             EnoughMoney();
         }
 
-        //if (MoneyManager.currentMoney >= 500 && Input.GetButtonDown("Upgrade One") && alreadyShownFour == false)
-        //{
-        //    DragAndDrop();
-        //}
+//        if (MoneyManager.currentMoney >= 50 && alreadyShownFour == false)
+  //      {
+    //        DragAndDrop();
+      //  }
     }
 }
