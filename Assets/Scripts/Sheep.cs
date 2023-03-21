@@ -12,7 +12,7 @@ namespace SheepGame.Chonnor
 
         private void Start()
         {
-            moveSpeed = 6;
+            moveSpeed = 8;
 
             int SheepLayer = LayerMask.NameToLayer("Sheep Layer");
 
