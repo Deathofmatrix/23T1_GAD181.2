@@ -18,12 +18,14 @@ namespace SheepGame.Chonnor
         [SerializeField] private MoneyManager moneyManager;
         [SerializeField] private GameObject clickPlusOne;
 
-        void Start()
+        public UpgradeButton[] upgradeButtonArray;
+
+        private void Start()
         {
             shopCanvas.enabled = false;
-            upgradeOne.enabled = false;
-            upgradeTwo.enabled = false;
-            upgradeThree.enabled = false;
+            upgradeOne.interactable = false;
+            upgradeTwo.interactable = false;
+            upgradeThree.interactable = false;
         }
 
         public void OpenShop()
@@ -46,32 +48,42 @@ namespace SheepGame.Chonnor
         // Update is called once per frame
         void Update()
         {
-            if (MoneyManager.currentMoney < 50)
-            {
-                upgradeOne.enabled = false;
-                upgradeTwo.enabled = false;
-                upgradeThree.enabled = false;
-            }
-            if(MoneyManager.currentMoney >= 50)
-            {
-                upgradeOne.enabled = true;
-                upgradeTwo.enabled = false;
-                upgradeThree.enabled = false;
-            }
-            // if money counter is higher than 10 then enable)
-            if(MoneyManager.currentMoney >= 100)
-            {
-                upgradeTwo.enabled = true;
-                upgradeThree.enabled = false;
-            }
-            // if money counter is higher than 50 then enable)
+            //if (MoneyManager.currentMoney < 50)
+            //{
+            //    upgradeOne.interactable = false;
+            //    upgradeTwo.interactable = false;
+            //    upgradeThree.interactable = false;
+            //}
+            //if (MoneyManager.currentMoney >= 50)
+            //{
+            //    upgradeOne.interactable = true;
+            //    upgradeTwo.interactable = false;
+            //    upgradeThree.interactable = false;
+            //}
+            //// if money counter is higher than 10 then enable)
+            //if (MoneyManager.currentMoney >= 100)
+            //{
+            //    upgradeTwo.interactable = true;
+            //    upgradeThree.interactable = false;
+            //}
+            //// if money counter is higher than 50 then enable)
 
-            if(MoneyManager.currentMoney >= 500)
+            //if (MoneyManager.currentMoney >= 500)
+            //{
+            //    upgradeThree.interactable = true;
+            //}
+            //// if money counter is higher than 100 then enable)
+            foreach (UpgradeButton button in upgradeButtonArray)
             {
-                upgradeThree.enabled = true;
+                if (button.GetPrice() >= MoneyManager.currentMoney)
+                {
+                    button.GetComponent<Button>().interactable = false;
+                }
+                else
+                {
+                    button.GetComponent<Button>().interactable = true;
+                }
             }
-            // if money counter is higher than 100 then enable)
-
         }
         
         public void Upgrade(int price, BuildingType.TypeOfBuilding typeOfBuilding, int increase)

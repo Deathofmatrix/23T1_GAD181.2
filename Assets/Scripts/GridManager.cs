@@ -100,6 +100,11 @@ namespace SheepGame.Chonnor
             return remainder;
         }
 
+        public void SetAdjacencyBonus()
+        {
+            
+        }
+
         /// <summary>
         /// This Method gets called when a building is placed
         /// </summary>

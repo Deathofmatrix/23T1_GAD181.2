@@ -62,7 +62,6 @@ namespace SheepGame.Chonnor
             newSheep.transform.position = sheepSpawnPosition;
             MeshRenderer mRend = newSheep.GetComponent<MeshRenderer>();
             mRend.material.color = colour;
-
         }
 
 

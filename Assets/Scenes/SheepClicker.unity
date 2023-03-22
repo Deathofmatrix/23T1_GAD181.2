@@ -271,6 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopManager: {fileID: 0}
+  buttonText: {fileID: 410528001}
+  buttonName: Spawn
   buttonPrice: 100
   typeOfBuilding: 2
   increase: 0
@@ -619,7 +621,7 @@ Transform:
   m_GameObject: {fileID: 138917173}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -20.307835, y: -10.404842, z: 15.656677}
-  m_LocalScale: {x: 9, y: 1, z: 16}
+  m_LocalScale: {x: 30, y: 1, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 751931406}
@@ -3246,7 +3248,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 422415f7e17e4d2469fee88e806825ca, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3569,6 +3571,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopManager: {fileID: 0}
+  buttonText: {fileID: 1129132389}
+  buttonName: Adjacent
   buttonPrice: 500
   typeOfBuilding: 3
   increase: 0
@@ -3754,6 +3758,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopManager: {fileID: 0}
+  buttonText: {fileID: 2067069144}
+  buttonName: Farm Help
   buttonPrice: 50
   typeOfBuilding: 1
   increase: 1
@@ -3961,6 +3967,10 @@ MonoBehaviour:
   moneyManager: {fileID: 1440316157}
   clickPlusOne: {fileID: 1160445927240504200, guid: 0fd3cccc616b7334cbb8eaf4b86bff63,
     type: 3}
+  upgradeButtonArray:
+  - {fileID: 1862925044}
+  - {fileID: 35591615}
+  - {fileID: 1640741278}
 --- !u!1 &2067069142
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,7 +4029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Double Tower
+  m_text: Farm Help
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

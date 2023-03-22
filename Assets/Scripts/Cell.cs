@@ -16,6 +16,8 @@ namespace SheepGame.Chonnor
         private Rigidbody buildingRB;
         private BuildingType building;
 
+        public GameObject[] allAdjacentSquares;
+
         [SerializeField] GameObject topLeft;
         [SerializeField] GameObject topMiddle;
         [SerializeField] GameObject topRight;
@@ -42,7 +44,7 @@ namespace SheepGame.Chonnor
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
             colliderInTrigger++;
 
@@ -58,6 +60,18 @@ namespace SheepGame.Chonnor
                     case BuildingType.TypeOfBuilding.SpawnIncreaser:
                         break;
                     case BuildingType.TypeOfBuilding.AdjacencyBonus:
+                        foreach (GameObject gameObject in allAdjacentSquares)
+                        {
+                            if (gameObject == null)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                BuildingType newBuildingType = gameObject.GetComponent<BuildingType>();
+                                newBuildingType.SetBuildingStats(newBuildingType.GetBuildingType(), newBuildingType.GetBuildingClick() + building.GetBuildingAdjacency());
+                            }
+                        }
                         break;
                     default:
                         Debug.LogError("Invalid Type passed through: " + building.GetBuildingType());
@@ -112,6 +126,7 @@ namespace SheepGame.Chonnor
 
         private void FindAdjacent()
         {
+
             float y = this.cellNumber.x;
             float x = this.cellNumber.y;
 
@@ -123,6 +138,8 @@ namespace SheepGame.Chonnor
             bottomLeft = GameObject.Find((x + 1) + ", " + (y - 1));
             bottomMiddle = GameObject.Find((x + 1) + ", " + (y));
             bottomRight = GameObject.Find((x + 1) + ", " + (y + 1));
+
+            allAdjacentSquares = new GameObject[8] {topLeft, topMiddle, topRight, Left, Right, bottomLeft, bottomMiddle, bottomRight};
         }
     }
 }

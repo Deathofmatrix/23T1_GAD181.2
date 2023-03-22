@@ -26,11 +26,11 @@ namespace SheepGame.Chonnor
         {
             return clickIncrease;
         }
-        public float GetBuildingSpawn()
+        public int GetBuildingSpawn()
         {
             return spawnIncrease;
         }
-        public float GetBuildingAdjacency()
+        public int GetBuildingAdjacency()
         {
             return adjacencyBonus;
         }
