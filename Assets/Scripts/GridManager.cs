@@ -7,6 +7,8 @@ namespace SheepGame.Chonnor
 {
     public class GridManager : MonoBehaviour
     {
+        public static bool isBuildingReadyToSpawn = true;
+
         [SerializeField] private GameObject cell;
 
         [SerializeField] private int width;
@@ -16,7 +18,8 @@ namespace SheepGame.Chonnor
         [SerializeField] private int cellSize;
         [SerializeField] private int[,] gridArray;
 
-        [SerializeField] private int clickLevel = 1;
+        [SerializeField] private int numberOfSheepToSpawn = 1;
+
 
         private void Start()
         {
@@ -47,50 +50,66 @@ namespace SheepGame.Chonnor
             return new Vector3(z, 0, x) * cellSize;
         }
 
+        /// <summary>
+        /// This works, try not to rework too much
+        /// </summary>
+        /// <param name="click">this is the click variable</param>
+        /// <param name="isPositive"></param>
         public void SetClickLevel(int click, bool isPositive)
         {
             if (isPositive)
             {
-                clickLevel += click;
-                if (clickLevel < 5)
+                numberOfSheepToSpawn += click;
+                if (numberOfSheepToSpawn < 5)
                 {
-                    SheepSpawner.clickAmount = Remainder();
+                    SheepSpawner.currentLevelOfClicker = Remainder();
                 }
-                else if (clickLevel < 9)
+                else if (numberOfSheepToSpawn < 9)
                 {
-                    SheepSpawner.clickAmount = Remainder() * 5;
+                    SheepSpawner.currentLevelOfClicker = Remainder() * 5;
                 }
-                else if (clickLevel < 13)
+                else if (numberOfSheepToSpawn < 13)
                 {
-                    SheepSpawner.clickAmount = Remainder() * 25;
+                    SheepSpawner.currentLevelOfClicker = Remainder() * 25;
                 }
             }
             else if (!isPositive)
             {
-                clickLevel -= click;
-                if (clickLevel < 5)
+                numberOfSheepToSpawn -= click;
+                if (numberOfSheepToSpawn < 5)
                 {
-                    SheepSpawner.clickAmount = Remainder();
+                    SheepSpawner.currentLevelOfClicker = Remainder();
                 }
-                else if (clickLevel < 9)
+                else if (numberOfSheepToSpawn < 9)
                 {
-                    SheepSpawner.clickAmount = Remainder() * 5;
+                    SheepSpawner.currentLevelOfClicker = Remainder() * 5;
                 }
-                else if (clickLevel < 13)
+                else if (numberOfSheepToSpawn < 13)
                 {
-                    SheepSpawner.clickAmount = Remainder() * 25;
+                    SheepSpawner.currentLevelOfClicker = Remainder() * 25;
                 }
             }
         }
         private int Remainder()
         {
-            int remainder = clickLevel % 4;
+            int remainder = numberOfSheepToSpawn % 4;
             if (remainder == 0)
             {
                 remainder = 4;
             }
             return remainder;
         }
+
+        /// <summary>
+        /// This Method gets called when a building is placed
+        /// </summary>
+        private void IterateThroughGrid()
+        {
+            // TODO 22/03 11:13 come back to this later (grid update)
+            //loop through every cell in the grid (2 for loops)
+            //for each cell check if it has a building
+            //if it has a building check if its a buffing building and apply to its neighbors
+            //Update click / spawn
+        }
     }
 }
-

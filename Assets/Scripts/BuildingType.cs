@@ -7,27 +7,19 @@ namespace SheepGame.Chonnor
 {
     public class BuildingType : MonoBehaviour
     {
+        public enum TypeOfBuilding {Undefined, ClickIncrease, SpawnIncreaser, AdjacencyBonus };
+        [SerializeField] private TypeOfBuilding typeOfBuilding = TypeOfBuilding.Undefined;
+
         [SerializeField] private string buildingName;
 
-        [SerializeField] private bool isClickIncreaser;
-        [SerializeField] private bool isSpawnkIncreaser;
-        [SerializeField] private bool isAdjacencyBonus;
-
         [SerializeField] private int clickIncrease;
-        [SerializeField] private float spawnIncrease;
-        [SerializeField] private float adjacencyBonus;
+        [SerializeField] private int spawnIncrease;
+        [SerializeField] private int adjacencyBonus;
 
-        public bool GetBuildingClickStatus()
+
+        public TypeOfBuilding GetBuildingType()
         {
-            return isClickIncreaser;
-        }
-        public bool GetBuildingSpawnStatus()
-        {
-            return isSpawnkIncreaser;
-        }
-        public bool GetBuildingAdjacencyStatus()
-        {
-            return isAdjacencyBonus;
+            return typeOfBuilding;
         }
 
         public int GetBuildingClick()
@@ -41,6 +33,28 @@ namespace SheepGame.Chonnor
         public float GetBuildingAdjacency()
         {
             return adjacencyBonus;
+        }
+
+        public void SetBuildingStats(TypeOfBuilding buildingType, int increase)
+        {
+            typeOfBuilding = buildingType;
+            switch (buildingType)
+            {
+                case TypeOfBuilding.ClickIncrease:
+                    clickIncrease = increase;
+                    break;
+                case TypeOfBuilding.SpawnIncreaser:
+                    spawnIncrease = increase;
+                    break;
+                case TypeOfBuilding.AdjacencyBonus:
+                    adjacencyBonus = increase;
+                    break;
+                default:
+                    Debug.LogError("Invalid Type passed through: ");
+                    break;
+
+
+            }
         }
     }
 }

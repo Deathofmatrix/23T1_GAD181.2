@@ -45,28 +45,63 @@ namespace SheepGame.Chonnor
         private void OnTriggerEnter(Collider other)
         {
             colliderInTrigger++;
+
             if (other.gameObject.CompareTag("Building") && colliderInTrigger == 1)
             {
                 building = other.GetComponent<BuildingType>();
-                if (building.GetBuildingClickStatus())
+
+                switch (building.GetBuildingType())
                 {
-                    gManager.SetClickLevel(building.GetBuildingClick(), true);
-                    //SheepSpawner.clickAmount += building.GetBuildingClick();
+                    case BuildingType.TypeOfBuilding.ClickIncrease:
+                        gManager.SetClickLevel(building.GetBuildingClick(), true);
+                        break;
+                    case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                        break;
+                    case BuildingType.TypeOfBuilding.AdjacencyBonus:
+                        break;
+                    default:
+                        Debug.LogError("Invalid Type passed through: " + building.GetBuildingType());
+                        break;
                 }
+
+                GridManager.isBuildingReadyToSpawn = true;
+
+                //if (building.GetBuildingClickStatus())
+                //{
+                //    gManager.SetClickLevel(building.GetBuildingClick(), true);
+                //    //SheepSpawner.clickAmount += building.GetBuildingClick();
+                //}
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
             colliderInTrigger--;
+
             if (other.gameObject.CompareTag("Building") && colliderInTrigger == 0)
             {
-                if (building.GetBuildingClickStatus())
+                switch (building.GetBuildingType())
                 {
-                    gManager.SetClickLevel(building.GetBuildingClick(), false);
-                    //SheepSpawner.clickAmount -= building.GetBuildingClick();
-                    building = null;
+                    case BuildingType.TypeOfBuilding.ClickIncrease:
+                        gManager.SetClickLevel(building.GetBuildingClick(), false);
+                        break;
+                    case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                        break;
+                    case BuildingType.TypeOfBuilding.AdjacencyBonus:
+                        break;
+                    default:
+                        Debug.LogError("Invalid Type passed through: " + building.GetBuildingType());
+                        break;
                 }
+
+                GridManager.isBuildingReadyToSpawn = false;
+
+                //if (building.GetBuildingClickStatus())
+                //{
+                //    gManager.SetClickLevel(building.GetBuildingClick(), false);
+                //    //SheepSpawner.clickAmount -= building.GetBuildingClick();
+                //    building = null;
+                //}
             }
         }
 

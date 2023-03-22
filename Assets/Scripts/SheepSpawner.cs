@@ -9,12 +9,12 @@ namespace SheepGame.Chonnor
     {
         public GameObject Sheep;
         private Vector3 sheepSpawnPosition;
-        public static int clickAmount;
+        public static int currentLevelOfClicker;
 
         private void Start()
         {
             sheepSpawnPosition = this.transform.position;
-            clickAmount = 1;
+            currentLevelOfClicker = 1;
         }
         private void Update()
         {
@@ -23,31 +23,31 @@ namespace SheepGame.Chonnor
 
         public void SheepClick()
         {
-            if (clickAmount <= 0)
+            if (currentLevelOfClicker <= 0)
             {
                 Debug.LogWarning("Click equals zero!!!");
             }
 
-            else if (clickAmount < 5)
+            else if (currentLevelOfClicker < 5)
             {
-                for (int i = 0; i < clickAmount; i++)
+                for (int i = 0; i < currentLevelOfClicker; i++)
                 {
                     SheepSpawn(Color.white);
                     Sheep.tag = "White Sheep";
 
                 }
             }
-            else if (clickAmount < 25)
+            else if (currentLevelOfClicker < 25)
             {
-                for (int i = 0; i < clickAmount / 5; i++)
+                for (int i = 0; i < currentLevelOfClicker / 5; i++)
                 {
                     SheepSpawn(Color.black);
                     Sheep.tag = "Black Sheep";
                 }
             }
-            else if (clickAmount < 125)
+            else if (currentLevelOfClicker < 125)
             {
-                for (int i = 0; i < clickAmount / 25; i++)
+                for (int i = 0; i < currentLevelOfClicker / 25; i++)
                 {
                     SheepSpawn(Color.red);
                     Sheep.tag = "Red Sheep";

@@ -28,7 +28,14 @@ namespace SheepGame.Chonnor
 
         public void OpenShop()
         {
-            shopCanvas.enabled = true;
+            if (!shopCanvas.enabled)
+            {
+                shopCanvas.enabled = true;
+            }
+            else if (shopCanvas.enabled)
+            {
+                shopCanvas.enabled = false;
+            }
         }
 
         public void CloseShop()
@@ -39,14 +46,23 @@ namespace SheepGame.Chonnor
         // Update is called once per frame
         void Update()
         {
+            if (MoneyManager.currentMoney < 50)
+            {
+                upgradeOne.enabled = false;
+                upgradeTwo.enabled = false;
+                upgradeThree.enabled = false;
+            }
             if(MoneyManager.currentMoney >= 50)
             {
                 upgradeOne.enabled = true;
+                upgradeTwo.enabled = false;
+                upgradeThree.enabled = false;
             }
             // if money counter is higher than 10 then enable)
             if(MoneyManager.currentMoney >= 100)
             {
                 upgradeTwo.enabled = true;
+                upgradeThree.enabled = false;
             }
             // if money counter is higher than 50 then enable)
 
@@ -58,11 +74,17 @@ namespace SheepGame.Chonnor
 
         }
         
-        public void UpgradeOne()
+        public void Upgrade(int price, BuildingType.TypeOfBuilding typeOfBuilding, int increase)
         {
-            Instantiate(clickPlusOne, spawnPoint.transform.position, spawnPoint.transform.rotation);
-            
-            MoneyManager.currentMoney -= 50;
+            if (GridManager.isBuildingReadyToSpawn)
+            {
+                GameObject newbuilding = Instantiate(clickPlusOne, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                BuildingType newBuildingType = newbuilding.GetComponent<BuildingType>();
+                newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.ClickIncrease, increase);
+                GridManager.isBuildingReadyToSpawn = false;
+
+                MoneyManager.currentMoney -= price;
+            }
         }
     }
 }
