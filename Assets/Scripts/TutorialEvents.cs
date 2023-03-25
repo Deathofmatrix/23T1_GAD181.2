@@ -29,6 +29,7 @@ public class TutorialEvents : MonoBehaviour
 
     // checks the list of moneymilestones to see if any have been reached 
     // if they have it prints the headline, and checks that milestone off - making it impossible to check off again
+    // even if the player goes below that milestone again
     private void CheckmoneyMilestoneReached(int currentMoney)  
     {
         for (int i = 0; i < moneyMilestone.Length; i++)
