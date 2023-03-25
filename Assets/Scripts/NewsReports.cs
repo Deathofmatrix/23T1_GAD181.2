@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialEvents : MonoBehaviour
+public class NewsReports : MonoBehaviour
 {
 
     public GameObject newsPrefab; // a variable for the prefab which shows the news
