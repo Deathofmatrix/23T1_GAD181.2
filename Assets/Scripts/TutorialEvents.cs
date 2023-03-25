@@ -1,150 +1,108 @@
 using SheepGame.Chonnor;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TutorialEvents : MonoBehaviour
 {
 
-    private float waitTime = 3f;
-    private float dragWaitTime = 6f;
-    private bool alreadyShownOne = false;
-    private bool alreadyShownTwo = false;
-    private bool alreadyShownThree = false;
-    private bool alreadyShownFour = false;
+    public GameObject newsPrefab; // a variable for the prefab which shows the news
+    public float scrollSpeed = 50f; // the speed at which the instantiated prefab scrolls across the bottom
+    public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
+    public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
 
-    // public Button upgradeOne;
+ //   private bool introNews = false;
+    private static int[] moneyMilestone = { 50, 250, 500, 1000 }; // the list of milestones that the player can make - this can be added to at any time
+    private static bool[] moneyMilestoneReached = new bool[moneyMilestone.Length]; // a bool to check if the milestone in the list has been reached once before, and never triggers again
+    private static int[] buildingMilestone = { 1, 2, 3, 6, 9 }; // same for buildings
+    private static bool[] buildingMilestoneReached = new bool[buildingMilestone.Length];
 
-    [SerializeField] private Image tryButton, watchSheep, moneyUp, tryShop, enoughMoney;
-    [SerializeField] private Image dragNDrop;
-    // [SerializeField] private Image tryClicking;
+    // we can add in new "moneyMilestone" and simply create a method to make more news headlines
+    // i've started one for Buildings - I just need a static variable for the number of buildings in the grid manager
 
-    private void Start()
+
+
+    // checks the list of moneymilestones to see if any have been reached 
+    // if they have it prints the headline, and checks that milestone off - making it impossible to check off again
+    private void CheckmoneyMilestoneReached(int currentMoney)  
     {
-        StartCoroutine(ScreenTime()); 
-
-        watchSheep.enabled = false;
-        moneyUp.enabled = false;
-        tryShop.enabled = false;
-        enoughMoney.enabled = false;
-        dragNDrop.enabled = false;
-        // tryClicking.enabled = false;
-
+        for (int i = 0; i < moneyMilestone.Length; i++)
+        {
+            if (currentMoney >= moneyMilestone[i] && !moneyMilestoneReached[i])
+            {
+                string headline = "You reached $" + moneyMilestone[i] + "!";
+                SpawnNews(headline);
+                moneyMilestoneReached[i] = true;
+            }
+        }
     }
 
-    private void Awake()
+    private void CheckNumberOfBuildings(int currentBuildings)
     {
-        tryButton.enabled = true;
+        for(int i = 0; i < buildingMilestone.Length; i++)
+        {
+            if ( currentBuildings >= buildingMilestone[i] && !buildingMilestoneReached[i])
+            {
+                string headline = "FARM_NAME now has " + buildingMilestone[i] + "building's on their farm!";
+                SpawnNews(headline);
+                buildingMilestoneReached[i] = true;
+            }
+        }
     }
 
-    public void WatchSheep()
+    private void SpawnNews(string headline)
     {
-        if (watchSheep != null)
+        GameObject newsObject = Instantiate(newsPrefab, panelTransform) as GameObject;
+        newsObject.transform.localPosition = new Vector3(panelTransform.rect.width / 2f, 0f, 0f);
+        TextMeshProUGUI textMesh = newsObject.GetComponent<TextMeshProUGUI>();
+        textMesh.text = headline;
+        textMesh.rectTransform.sizeDelta = newsSize;
+        StartCoroutine(MoveNewsObject(newsObject));
+    }
+
+    private IEnumerator MoveNewsObject(GameObject newsObject)
+    {
+        float width = newsObject.GetComponent<RectTransform>().rect.width;
+        float panelWidth = panelTransform.rect.width;
+        float edgeX = -panelWidth / 2f - width / 2f;
+
+        while (newsObject.transform.localPosition.x + (width / 2f) > edgeX)
+        {
+            newsObject.transform.Translate(-scrollSpeed * Time.deltaTime, 0f, 0f);
+            yield return null;
+        }
+
+        Destroy(newsObject);
+    }
+
+    void Update()
+
+    {
+        /*
+        if (introNews == true)
         {
             return;
         }
         else
         {
-            Destroy(watchSheep);
+            string headline = "Welcome to yoour farm! Try Click the sheep icon";
+            SpawnNews(headline);
+            introNews = true;
+
         }
+        */
+        int currentMoney = MoneyManager.currentMoney;
+        CheckmoneyMilestoneReached(currentMoney);
+
+        // int currentBuildings = ; need to locate or create a static variable to see how many buildings are in the grid manager
+
     }
 
 
 
-    public void MoneyUp()
-    {
-        moneyUp.enabled = true;
-        alreadyShownOne = true;
-        Debug.Log("Now True");
-        StartCoroutine(ScreenTimeTwo());
-    }
-
-    public void TryShop()
-    {
-        tryShop.enabled = true;
-        alreadyShownTwo = true;
-        StartCoroutine(ScrrenTimeThree());
-    }
-
-    public void EnoughMoney()
-    {
-        enoughMoney.enabled = true;
-        alreadyShownThree = true;
-        StartCoroutine(ScreenTimeFour());
-    }
-
-    public void DragAndDrop()
-    {
-        dragNDrop.enabled = true;
-        alreadyShownFour = true;
-        StartCoroutine(ScreenTimeFive());
-    }
-
-
-
-    IEnumerator ScreenTime()
-    {
-        yield return new WaitForSecondsRealtime(waitTime);
-        tryButton.enabled = false;
-
-        //yield return new WaitForSecondsRealtime(waitTime);
-        //watchSheep.enabled = false;
-        //yield return new WaitForSecondsRealtime(waitTime);
-        //tryClicking.enabled = false;
-        //yield return new WaitForSeconds(dragWaitTime);
-        //dragNDrop.enabled = false;
-    }
-
-    IEnumerator ScreenTimeTwo()
-    {
-        yield return new WaitForSecondsRealtime(waitTime);
-        moneyUp.enabled = false;
-    }
-
-    IEnumerator ScrrenTimeThree()
-    {
-        yield return new WaitForSecondsRealtime(waitTime);
-        tryShop.enabled = false;
-    }
-
-    IEnumerator ScreenTimeFour()
-
-    {
-        yield return new WaitForSecondsRealtime(waitTime);
-        enoughMoney.enabled = false;
-    }
-
-    IEnumerator ScreenTimeFive()
-    {
-        yield return new WaitForSeconds(dragWaitTime);
-        dragNDrop.enabled = false;
-    }
-
-    private void Update()
-    {
-
-        if (MoneyManager.currentMoney >= 1 && alreadyShownOne == false)
-        {
-            MoneyUp();
-          //  Debug.Log("Money Up");
-        }
-        //Debug.Log("Return Test");
-
-        if (MoneyManager.currentMoney >= 10 && alreadyShownTwo == false)
-        {
-            TryShop();
-          //  Debug.Log("Money 10");
-        }
-
-        if (MoneyManager.currentMoney >= 50 && alreadyShownThree == false)
-        {
-            EnoughMoney();
-        }
-
-//        if (MoneyManager.currentMoney >= 50 && alreadyShownFour == false)
-  //      {
-    //        DragAndDrop();
-      //  }
-    }
 }
