@@ -276,7 +276,7 @@ MonoBehaviour:
   buttonName: Spawn
   buttonPrice: 100
   typeOfBuilding: 2
-  increase: 0
+  increase: 1
 --- !u!1 &59506992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3059,7 +3059,7 @@ MonoBehaviour:
   buttonName: Adjacent
   buttonPrice: 500
   typeOfBuilding: 3
-  increase: 0
+  increase: 1
 --- !u!1 &1825648219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,12 +3575,17 @@ PrefabInstance:
     - target: {fileID: 307151123421575875, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
       propertyPath: clickIncrease
-      value: 5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 307151123421575875, guid: f3d1f9974671e014f9c5710b6dc45476,
+        type: 3}
+      propertyPath: adjacencyBonus
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 307151123421575875, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}
       propertyPath: typeOfBuilding
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 307151123421575878, guid: f3d1f9974671e014f9c5710b6dc45476,
         type: 3}

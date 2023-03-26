@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace SheepGame.Chonnor
 
         private int colliderInTrigger;
         private Rigidbody buildingRB;
-        private BuildingType building;
+        private BuildingType buildingTypeScript;
 
         public GameObject[] allAdjacentSquares;
 
@@ -37,7 +38,7 @@ namespace SheepGame.Chonnor
             if (other.gameObject.CompareTag("Building") && colliderInTrigger <= 1)
             {
                 other.transform.position = new Vector3(this.transform.position.x, 5, this.transform.position.z);
-                Debug.Log("Building entered" + this.name);
+                //Debug.Log("Building entered" + this.name);
                 buildingRB = other.GetComponent<Rigidbody>();
                 buildingRB.constraints = RigidbodyConstraints.FreezePosition;
                 buildingRB.constraints = RigidbodyConstraints.FreezeRotation;
@@ -50,33 +51,9 @@ namespace SheepGame.Chonnor
 
             if (other.gameObject.CompareTag("Building") && colliderInTrigger == 1)
             {
-                building = other.GetComponent<BuildingType>();
+                buildingTypeScript = other.GetComponent<BuildingType>();
 
-                switch (building.GetBuildingType())
-                {
-                    case BuildingType.TypeOfBuilding.ClickIncrease:
-                        gManager.SetClickLevel(building.GetBuildingClick(), true);
-                        break;
-                    case BuildingType.TypeOfBuilding.SpawnIncreaser:
-                        break;
-                    case BuildingType.TypeOfBuilding.AdjacencyBonus:
-                        foreach (GameObject gameObject in allAdjacentSquares)
-                        {
-                            if (gameObject == null)
-                            {
-                                continue;
-                            }
-                            else
-                            {
-                                BuildingType newBuildingType = gameObject.GetComponent<BuildingType>();
-                                newBuildingType.SetBuildingStats(newBuildingType.GetBuildingType(), newBuildingType.GetBuildingClick() + building.GetBuildingAdjacency());
-                            }
-                        }
-                        break;
-                    default:
-                        Debug.LogError("Invalid Type passed through: " + building.GetBuildingType());
-                        break;
-                }
+                CheckAndChangeStats();
 
                 GridManager.isBuildingReadyToSpawn = true;
 
@@ -94,21 +71,23 @@ namespace SheepGame.Chonnor
 
             if (other.gameObject.CompareTag("Building") && colliderInTrigger == 0)
             {
-                switch (building.GetBuildingType())
+                switch (buildingTypeScript.GetBuildingType())
                 {
                     case BuildingType.TypeOfBuilding.ClickIncrease:
-                        gManager.SetClickLevel(building.GetBuildingClick(), false);
+                        gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), false);
                         break;
                     case BuildingType.TypeOfBuilding.SpawnIncreaser:
                         break;
                     case BuildingType.TypeOfBuilding.AdjacencyBonus:
                         break;
                     default:
-                        Debug.LogError("Invalid Type passed through: " + building.GetBuildingType());
+                        Debug.LogError("Invalid Type passed through: " + buildingTypeScript.GetBuildingType());
                         break;
                 }
 
                 GridManager.isBuildingReadyToSpawn = false;
+
+                buildingTypeScript = null;
 
                 //if (building.GetBuildingClickStatus())
                 //{
@@ -140,6 +119,54 @@ namespace SheepGame.Chonnor
             bottomRight = GameObject.Find((x + 1) + ", " + (y + 1));
 
             allAdjacentSquares = new GameObject[8] {topLeft, topMiddle, topRight, Left, Right, bottomLeft, bottomMiddle, bottomRight};
+        }
+
+        public void CheckAndChangeStats()
+        {
+            switch (buildingTypeScript.GetBuildingType())
+            {
+                case BuildingType.TypeOfBuilding.ClickIncrease:
+                    gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), true);
+                    break;
+                case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                    break;
+                case BuildingType.TypeOfBuilding.AdjacencyBonus:
+                    int count = 0;
+                    int count2 = 10;
+                    foreach (GameObject adjacentCell in allAdjacentSquares)
+                    {
+                        if (adjacentCell == null)
+                        {
+                            Debug.Log("null ");
+                        }
+                        else
+                        {
+                            BuildingType newBuildingTypeScript = adjacentCell.GetComponent<Cell>().GetBuildingTypeScript();
+
+                            if (newBuildingTypeScript != null)
+                            {
+                                count++;
+                                Debug.Log(count);
+                                ////newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.AdjacencyBonus, 2);
+                                //Debug.Log("adjacent" + adjacentCell.GetComponent<Cell>().allAdjacentSquares);
+                                //newBuildingTypeScript = null;
+                            }
+                            else
+                            {
+                                count2++;
+                                Debug.Log(count2);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    Debug.LogError("Invalid Type passed through: " + buildingTypeScript.GetBuildingType());
+                    break;
+            }
+        }
+        public BuildingType GetBuildingTypeScript()
+        {
+            return buildingTypeScript;
         }
     }
 }
