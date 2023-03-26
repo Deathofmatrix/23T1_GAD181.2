@@ -53,7 +53,7 @@ namespace SheepGame.Chonnor
             {
                 buildingTypeScript = other.GetComponent<BuildingType>();
 
-                CheckAndChangeStats();
+                CheckAndChangeStats(true);
 
                 GridManager.isBuildingReadyToSpawn = true;
 
@@ -71,19 +71,8 @@ namespace SheepGame.Chonnor
 
             if (other.gameObject.CompareTag("Building") && colliderInTrigger == 0)
             {
-                switch (buildingTypeScript.GetBuildingType())
-                {
-                    case BuildingType.TypeOfBuilding.ClickIncrease:
-                        gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), false);
-                        break;
-                    case BuildingType.TypeOfBuilding.SpawnIncreaser:
-                        break;
-                    case BuildingType.TypeOfBuilding.AdjacencyBonus:
-                        break;
-                    default:
-                        Debug.LogError("Invalid Type passed through: " + buildingTypeScript.GetBuildingType());
-                        break;
-                }
+
+                CheckAndChangeStats(false);
 
                 GridManager.isBuildingReadyToSpawn = false;
 
@@ -98,16 +87,16 @@ namespace SheepGame.Chonnor
             }
         }
 
-        public void SetCellNumber(int x, int z)
+        public void SetCellNumber(int x, int y)
         {
-            cellNumber = new Vector2(x, z);
+            cellNumber = new Vector2(x, y);
         }
 
         private void FindAdjacent()
         {
 
-            float y = this.cellNumber.x;
-            float x = this.cellNumber.y;
+            float x = this.cellNumber.x;
+            float y = this.cellNumber.y;
 
             topLeft = GameObject.Find((x - 1) + ", " + (y - 1));
             topMiddle = GameObject.Find((x - 1) + ", " + (y));
@@ -121,41 +110,41 @@ namespace SheepGame.Chonnor
             allAdjacentSquares = new GameObject[8] {topLeft, topMiddle, topRight, Left, Right, bottomLeft, bottomMiddle, bottomRight};
         }
 
-        public void CheckAndChangeStats()
+        public void CheckAndChangeStats(bool isIncreasedOrDecreased)
         {
             switch (buildingTypeScript.GetBuildingType())
             {
                 case BuildingType.TypeOfBuilding.ClickIncrease:
-                    gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), true);
+                    gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
                     break;
                 case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                    //gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
                     break;
                 case BuildingType.TypeOfBuilding.AdjacencyBonus:
-                    int count = 0;
-                    int count2 = 10;
                     foreach (GameObject adjacentCell in allAdjacentSquares)
                     {
-                        if (adjacentCell == null)
+                        if (adjacentCell != null)
                         {
-                            Debug.Log("null ");
-                        }
-                        else
-                        {
-                            BuildingType newBuildingTypeScript = adjacentCell.GetComponent<Cell>().GetBuildingTypeScript();
+                            Cell adjacentCellScript = adjacentCell.GetComponent<Cell>();
+                            BuildingType adjacentBuildingTypeScript = adjacentCellScript.GetBuildingTypeScript();
 
-                            if (newBuildingTypeScript != null)
+                            if (adjacentBuildingTypeScript != null && adjacentBuildingTypeScript.GetBuildingType() != BuildingType.TypeOfBuilding.AdjacencyBonus)
                             {
-                                count++;
-                                Debug.Log(count);
-                                ////newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.AdjacencyBonus, 2);
+                                Debug.Log(adjacentCell.name);
+                                adjacentBuildingTypeScript.SetBuildingStats(adjacentBuildingTypeScript.GetBuildingType(), buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
+                                adjacentCellScript.CheckAndChangeStats(isIncreasedOrDecreased);
                                 //Debug.Log("adjacent" + adjacentCell.GetComponent<Cell>().allAdjacentSquares);
                                 //newBuildingTypeScript = null;
                             }
+
                             else
                             {
-                                count2++;
-                                Debug.Log(count2);
+                                Debug.Log("noscript " + adjacentCell.name);
                             }
+                        }
+                        else
+                        {
+                            Debug.Log("null");
                         }
                     }
                     break;

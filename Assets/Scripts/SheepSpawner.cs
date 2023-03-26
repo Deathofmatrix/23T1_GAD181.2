@@ -10,6 +10,7 @@ namespace SheepGame.Chonnor
         public GameObject Sheep;
         private Vector3 sheepSpawnPosition;
         public static int currentLevelOfClicker;
+        public int currentLevelOfClickerLevelPublic;
 
         private void Start()
         {
@@ -18,6 +19,7 @@ namespace SheepGame.Chonnor
         }
         private void Update()
         {
+            currentLevelOfClickerLevelPublic = currentLevelOfClicker;
             RandomSheepPos();
         }
 

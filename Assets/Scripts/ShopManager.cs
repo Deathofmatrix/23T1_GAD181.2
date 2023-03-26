@@ -92,7 +92,7 @@ namespace SheepGame.Chonnor
             {
                 GameObject newbuilding = Instantiate(clickPlusOne, spawnPoint.transform.position, spawnPoint.transform.rotation);
                 BuildingType newBuildingType = newbuilding.GetComponent<BuildingType>();
-                newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.ClickIncrease, increase);
+                newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.ClickIncrease, increase, true);
                 GridManager.isBuildingReadyToSpawn = false;
 
                 MoneyManager.currentMoney -= price;

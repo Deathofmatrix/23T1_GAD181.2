@@ -35,19 +35,40 @@ namespace SheepGame.Chonnor
             return adjacencyBonus;
         }
 
-        public void SetBuildingStats(TypeOfBuilding buildingType, int increase)
+        public void SetBuildingStats(TypeOfBuilding buildingType, int increaseOrDecrease, bool isIncreased)
         {
             typeOfBuilding = buildingType;
             switch (buildingType)
             {
                 case TypeOfBuilding.ClickIncrease:
-                    clickIncrease = increase;
+                    if (isIncreased)
+                    {
+                        clickIncrease += increaseOrDecrease;
+                    }
+                    else if (!isIncreased)
+                    {
+                        clickIncrease -= increaseOrDecrease;
+                    }
                     break;
                 case TypeOfBuilding.SpawnIncreaser:
-                    spawnIncrease = increase;
+                    if (isIncreased)
+                    {
+                        spawnIncrease += increaseOrDecrease;
+                    }
+                    else if(!isIncreased)
+                    {
+                        spawnIncrease -= increaseOrDecrease;
+                    }
                     break;
                 case TypeOfBuilding.AdjacencyBonus:
-                    adjacencyBonus = increase;
+                    if (isIncreased)
+                    {
+                        adjacencyBonus += increaseOrDecrease;
+                    }
+                    else if(!isIncreased)
+                    {
+                        adjacencyBonus -= increaseOrDecrease;
+                    }
                     break;
                 default:
                     Debug.LogError("Invalid Type passed through: ");
