@@ -11,11 +11,13 @@ namespace SheepGame.Chonnor
     public class Cell : MonoBehaviour
     {
         [SerializeField] private Vector2 cellNumber;
-        [SerializeField] private GridManager gManager;
+        [SerializeField] private GridManager gridManager;
 
         private int colliderInTrigger;
         private Rigidbody buildingRB;
         private BuildingType buildingTypeScript;
+        [SerializeField] public int storedClickIncrease;
+        [SerializeField] public int storedSpawnIncrease;
 
         public GameObject[] allAdjacentSquares;
 
@@ -30,7 +32,7 @@ namespace SheepGame.Chonnor
 
         private void Start()
         {
-            gManager = GameObject.Find("Grid").GetComponent<GridManager>();
+            gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
             FindAdjacent();
         }
         private void OnTriggerStay(Collider other)
@@ -51,11 +53,14 @@ namespace SheepGame.Chonnor
 
             if (other.gameObject.CompareTag("Building") && colliderInTrigger == 1)
             {
+
                 buildingTypeScript = other.GetComponent<BuildingType>();
 
                 CheckAndChangeStats(true);
 
                 GridManager.isBuildingReadyToSpawn = true;
+
+                gridManager.IterateThroughGrid();
 
                 //if (building.GetBuildingClickStatus())
                 //{
@@ -73,6 +78,8 @@ namespace SheepGame.Chonnor
             {
 
                 CheckAndChangeStats(false);
+
+                gridManager.IterateThroughGridDown();
 
                 GridManager.isBuildingReadyToSpawn = false;
 
@@ -115,7 +122,8 @@ namespace SheepGame.Chonnor
             switch (buildingTypeScript.GetBuildingType())
             {
                 case BuildingType.TypeOfBuilding.ClickIncrease:
-                    gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
+                    ChangeStoredClick(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
+                    //gridManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
                     break;
                 case BuildingType.TypeOfBuilding.SpawnIncreaser:
                     //gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
@@ -128,23 +136,32 @@ namespace SheepGame.Chonnor
                             Cell adjacentCellScript = adjacentCell.GetComponent<Cell>();
                             BuildingType adjacentBuildingTypeScript = adjacentCellScript.GetBuildingTypeScript();
 
-                            if (adjacentBuildingTypeScript != null && adjacentBuildingTypeScript.GetBuildingType() != BuildingType.TypeOfBuilding.AdjacencyBonus)
-                            {
-                                Debug.Log(adjacentCell.name);
-                                adjacentBuildingTypeScript.SetBuildingStats(adjacentBuildingTypeScript.GetBuildingType(), buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
-                                adjacentCellScript.CheckAndChangeStats(isIncreasedOrDecreased);
-                                //Debug.Log("adjacent" + adjacentCell.GetComponent<Cell>().allAdjacentSquares);
-                                //newBuildingTypeScript = null;
-                            }
+                            adjacentCellScript.ChangeStoredClick(buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
+                            //Debug.Log(adjacentCell.name);
+                            //if (isIncreasedOrDecreased)
+                            //{
+                            //    gridManager.SetClickLevel(adjacentBuildingTypeScript.GetBuildingClick(), !isIncreasedOrDecreased);
+                            //}
+                            //adjacentBuildingTypeScript.SetBuildingStats(adjacentBuildingTypeScript.GetBuildingType(), buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
+                            //gridManager.SetClickLevel(adjacentBuildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
+                            ////adjacentCellScript.CheckAndChangeStats(isIncreasedOrDecreased);
+                            ////Debug.Log("adjacent" + adjacentCell.GetComponent<Cell>().allAdjacentSquares);
+                            adjacentCellScript = null;
+                            adjacentBuildingTypeScript = null;
 
-                            else
-                            {
-                                Debug.Log("noscript " + adjacentCell.name);
-                            }
+                            //if (adjacentBuildingTypeScript != null && adjacentBuildingTypeScript.GetBuildingType() != BuildingType.TypeOfBuilding.AdjacencyBonus)
+                            //{
+                                
+                            //}
+                            //else
+                            //{
+                            //    //Debug.Log("noscript " + adjacentCell.name);
+                            //}
                         }
+
                         else
                         {
-                            Debug.Log("null");
+                            //Debug.Log("null");
                         }
                     }
                     break;
@@ -156,6 +173,41 @@ namespace SheepGame.Chonnor
         public BuildingType GetBuildingTypeScript()
         {
             return buildingTypeScript;
+        }
+
+        public void ChangeStoredClick(int value, bool upOrDown)
+        {
+            if (upOrDown)
+            {
+                storedClickIncrease += value;
+            }
+            else if (!upOrDown)
+            {
+                storedClickIncrease -= value;
+            }
+        }
+        public void ChangeStoredSpawn(int value, bool upOrDown)
+        {
+            if (upOrDown)
+            {
+                storedSpawnIncrease += value;
+            }
+            else if (!upOrDown)
+            {
+                storedSpawnIncrease -= value;
+            }
+        }
+        public int GetStoredClick()
+        {
+            return storedClickIncrease;
+        }
+        public int GetStoredSpawn()
+        {
+            return storedSpawnIncrease;
+        }
+        public int GetCollidersInTrigger()
+        {
+            return colliderInTrigger;
         }
     }
 }

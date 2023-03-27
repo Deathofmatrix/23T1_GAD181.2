@@ -2607,10 +2607,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cell: {fileID: 3824980302062252156, guid: 548cc9ac9f7520c488c67d3d80448c14, type: 3}
+  height: 3
   width: 3
-  depth: 3
   cellSize: 10
+  allCells: []
   numberOfSheepToSpawn: 1
+  totalClick: 0
+  totalSpawn: 0
 --- !u!4 &1587071684
 Transform:
   m_ObjectHideFlags: 0

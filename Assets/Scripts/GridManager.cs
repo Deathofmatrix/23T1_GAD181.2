@@ -11,14 +11,19 @@ namespace SheepGame.Chonnor
 
         [SerializeField] private GameObject cell;
 
+        [SerializeField] private int height;
+        //height == x
         [SerializeField] private int width;
-        //width == z
-        [SerializeField] private int depth;
-        //depth == x
+        //width == y
         [SerializeField] private int cellSize;
-        [SerializeField] private int[,] gridArray;
+
+        public int[,] gridArray;
+        [SerializeField] List<GameObject> allCells = new List<GameObject>();
 
         [SerializeField] private int numberOfSheepToSpawn = 1;
+
+        [SerializeField] private int totalClick;
+        [SerializeField] private int totalSpawn;
 
 
         private void Start()
@@ -26,28 +31,36 @@ namespace SheepGame.Chonnor
             SpawnGrid();
         }
 
+        private void Update()
+        {
+            
+        }
+
         public void SpawnGrid()
         {
-            gridArray = new int[depth, width];
+            gridArray = new int[width, height];
 
-            for (int z = 0; z < gridArray.GetLength(0); z++)
+            for (int x = 0; x < gridArray.GetLength(0); x++)
             {
-                for (int x = 0; x < gridArray.GetLength(1); x++)
+                for (int y = 0; y < gridArray.GetLength(1); y++)
                 {
                     GameObject newCell = Instantiate(cell);
-                    Vector3 currentCellPos = GetPosition(z, x) + transform.position;
+                    Vector3 currentCellPos = GetPosition(x, y) + transform.position;
                     newCell.transform.position = currentCellPos;
                     newCell.transform.localScale = new Vector3(cellSize, 0.1f, cellSize);
-                    newCell.name = z + ", " + x;
-                    newCell.GetComponent<Cell>().SetCellNumber(z, x);
+                    newCell.name = x + ", " + y;
+                    newCell.GetComponent<Cell>().SetCellNumber(x, y);
                     
-                    newCell.transform.parent = this.transform;
+                    newCell.transform.parent = this.transform; 
+
+                    allCells.Add(newCell);
                 }
             }
         }
-        private Vector3 GetPosition(int z, int x)
+
+        private Vector3 GetPosition(int x, int y)
         {
-            return new Vector3(z, 0, x) * cellSize;
+            return new Vector3(x, 0, y) * cellSize;
         }
 
         /// <summary>
@@ -108,13 +121,68 @@ namespace SheepGame.Chonnor
         /// <summary>
         /// This Method gets called when a building is placed
         /// </summary>
-        private void IterateThroughGrid()
+        public void IterateThroughGrid()
         {
+            totalClick = 0;
+            foreach (GameObject cell in allCells)
+            {
+                Cell cellScript = cell.GetComponent<Cell>();
+                BuildingType buildingScript = cellScript.GetBuildingTypeScript();
+
+                if (cellScript.GetCollidersInTrigger() == 1)
+                {
+                    switch (buildingScript.GetBuildingType())
+                    {
+                        case BuildingType.TypeOfBuilding.ClickIncrease:
+                            totalClick += cellScript.GetStoredClick();
+                            break;
+                        case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                            totalSpawn += cellScript.GetStoredClick();
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+                else
+                {
+                    Debug.Log("Too many colliders in trigger!!!");
+                }
+            }
             // TODO 22/03 11:13 come back to this later (grid update)
             //loop through every cell in the grid (2 for loops)
             //for each cell check if it has a building
             //if it has a building check if its a buffing building and apply to its neighbors
             //Update click / spawn
+        }
+
+        public void IterateThroughGridDown()
+        {
+            foreach (GameObject cell in allCells)
+            {
+                Cell cellScript = cell.GetComponent<Cell>();
+                BuildingType buildingScript = cellScript.GetBuildingTypeScript();
+
+                if (cellScript.GetCollidersInTrigger() == 1)
+                {
+                    switch (buildingScript.GetBuildingType())
+                    {
+                        case BuildingType.TypeOfBuilding.ClickIncrease:
+                            totalClick -= cellScript.GetStoredClick();
+                            break;
+                        case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                            totalSpawn -= cellScript.GetStoredSpawn();
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+                else
+                {
+                    Debug.Log("Too many colliders in trigger!!!");
+                }
+            }
         }
     }
 }

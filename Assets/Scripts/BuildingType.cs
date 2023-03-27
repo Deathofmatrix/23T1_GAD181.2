@@ -73,8 +73,6 @@ namespace SheepGame.Chonnor
                 default:
                     Debug.LogError("Invalid Type passed through: ");
                     break;
-
-
             }
         }
     }
