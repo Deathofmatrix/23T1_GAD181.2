@@ -1,10 +1,6 @@
 using SheepGame.Chonnor;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +12,14 @@ public class NewsReports : MonoBehaviour
     public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
     public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
 
- //   private bool introNews = false;
+    private bool introNews = false;
     private static int[] moneyMilestone = { 50, 250, 500, 1000 }; // the list of milestones that the player can make - this can be added to at any time
     private static bool[] moneyMilestoneReached = new bool[moneyMilestone.Length]; // a bool to check if the milestone in the list has been reached once before, and never triggers again
     private static int[] buildingMilestone = { 1, 2, 3, 6, 9 }; // same for buildings
     private static bool[] buildingMilestoneReached = new bool[buildingMilestone.Length];
+    private static int[] tutorialMilestones =  { 0, 10 };
+    private static string[] tutorialMEssages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" };
+    private static bool[] tutorialMilestonesReached = new bool[tutorialMilestones.Length];
 
     // we can add in new "moneyMilestone" and simply create a method to make more news headlines
     // i've started one for Buildings - I just need a static variable for the number of buildings in the grid manager
@@ -30,6 +29,21 @@ public class NewsReports : MonoBehaviour
     // checks the list of moneymilestones to see if any have been reached 
     // if they have it prints the headline, and checks that milestone off - making it impossible to check off again
     // even if the player goes below that milestone again
+
+    private void TutorialLevel(int tutorialLevel)
+    {
+        for(int i = 0 ; i < tutorialMilestones.Length; i++)
+        {
+            if(tutorialLevel == tutorialMilestones[i] && !tutorialMilestonesReached[i])
+            {
+                string headline = tutorialMEssages[i] ;
+                SpawnNews(headline);
+                tutorialMilestonesReached[i] = true;
+            } 
+        }
+    }
+
+
     private void CheckmoneyMilestoneReached(int currentMoney)  
     {
         for (int i = 0; i < moneyMilestone.Length; i++)
@@ -77,33 +91,20 @@ public class NewsReports : MonoBehaviour
             newsObject.transform.Translate(-scrollSpeed * Time.deltaTime, 0f, 0f);
             yield return null;
         }
-
+        
         Destroy(newsObject);
     }
 
-    void Update()
 
+    private void Update()
     {
-        /*
-        if (introNews == true)
-        {
-            return;
-        }
-        else
-        {
-            string headline = "Welcome to yoour farm! Try Click the sheep icon";
-            SpawnNews(headline);
-            introNews = true;
-
-        }
-        */
+        // int currentBuildings = GridManager.currentbuildings;
         int currentMoney = MoneyManager.currentMoney;
         CheckmoneyMilestoneReached(currentMoney);
 
-        // int currentBuildings = ; need to locate or create a static variable to see how many buildings are in the grid manager
+        TutorialLevel(currentMoney);
 
+        // CheckNumberOfBuildings()
+        
     }
-
-
-
 }
