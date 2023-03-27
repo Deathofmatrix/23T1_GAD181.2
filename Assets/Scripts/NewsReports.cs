@@ -12,13 +12,12 @@ public class NewsReports : MonoBehaviour
     public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
     public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
 
-    private bool introNews = false;
     private static int[] moneyMilestone = { 50, 250, 500, 1000 }; // the list of milestones that the player can make - this can be added to at any time
     private static bool[] moneyMilestoneReached = new bool[moneyMilestone.Length]; // a bool to check if the milestone in the list has been reached once before, and never triggers again
     private static int[] buildingMilestone = { 1, 2, 3, 6, 9 }; // same for buildings
     private static bool[] buildingMilestoneReached = new bool[buildingMilestone.Length];
-    private static int[] tutorialMilestones =  { 0, 10 };
-    private static string[] tutorialMEssages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" };
+    private static int[] tutorialMilestones =  { 0, 10 , 30 };
+    private static string[] tutorialMEssages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" , "Why don't you check out the Upgrades?" };
     private static bool[] tutorialMilestonesReached = new bool[tutorialMilestones.Length];
 
     // we can add in new "moneyMilestone" and simply create a method to make more news headlines
