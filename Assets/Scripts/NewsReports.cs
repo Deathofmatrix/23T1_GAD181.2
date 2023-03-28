@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class NewsReports : MonoBehaviour
 {
-
     public GameObject newsPrefab; // a variable for the prefab which shows the news
     public float scrollSpeed = 50f; // the speed at which the instantiated prefab scrolls across the bottom
     public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
     public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
+    public static string farmNameString;
+    public Text farmName;
 
     private static int[] moneyMilestone = { 50, 250, 500, 1000 }; // the list of milestones that the player can make - this can be added to at any time
     private static bool[] moneyMilestoneReached = new bool[moneyMilestone.Length]; // a bool to check if the milestone in the list has been reached once before, and never triggers again
@@ -28,6 +29,12 @@ public class NewsReports : MonoBehaviour
     // checks the list of moneymilestones to see if any have been reached 
     // if they have it prints the headline, and checks that milestone off - making it impossible to check off again
     // even if the player goes below that milestone again
+
+    private void Start()
+    {
+
+        farmName.text = farmNameString.ToString();
+    }
 
     private void TutorialLevel(int tutorialLevel)
     {
@@ -49,7 +56,7 @@ public class NewsReports : MonoBehaviour
         {
             if (currentMoney >= moneyMilestone[i] && !moneyMilestoneReached[i])
             {
-                string headline = "You reached $" + moneyMilestone[i] + "!";
+                string headline = farmNameString + " Just reached $" + moneyMilestone[i] + "!";
                 SpawnNews(headline);
                 moneyMilestoneReached[i] = true;
             }
@@ -83,9 +90,9 @@ public class NewsReports : MonoBehaviour
     {
         float width = newsObject.GetComponent<RectTransform>().rect.width;
         float panelWidth = panelTransform.rect.width;
-        float edgeX = -panelWidth / 2f - width / 2f;
+        float edgeX = -panelWidth * 2f - width * 2f;
 
-        while (newsObject.transform.localPosition.x + (width / 2f) > edgeX)
+        while (newsObject.transform.localPosition.x + (width * 2f) > edgeX)
         {
             newsObject.transform.Translate(-scrollSpeed * Time.deltaTime, 0f, 0f);
             yield return null;
