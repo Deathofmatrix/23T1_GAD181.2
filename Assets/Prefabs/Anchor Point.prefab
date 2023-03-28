@@ -96,7 +96,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 5, z: 0.1}
+  m_Size: {x: 0.2, y: 5, z: 0.2}
   m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &7162546811641551820
 MonoBehaviour:
@@ -110,3 +110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f1b2e4ab5a54846aec5251520a25bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellNumber: {x: 0, y: 0}
+  gridManager: {fileID: 0}
+  colliderInTrigger: 0
+  storedClickIncrease: 0
+  storedSpawnIncrease: 0
+  allAdjacentSquares: []
+  topLeft: {fileID: 0}
+  topMiddle: {fileID: 0}
+  topRight: {fileID: 0}
+  Left: {fileID: 0}
+  Right: {fileID: 0}
+  bottomLeft: {fileID: 0}
+  bottomMiddle: {fileID: 0}
+  bottomRight: {fileID: 0}

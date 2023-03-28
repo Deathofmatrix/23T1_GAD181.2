@@ -13,9 +13,13 @@ namespace SheepGame.Chonnor
         [SerializeField] private Vector2 cellNumber;
         [SerializeField] private GridManager gridManager;
 
-        private int colliderInTrigger;
+        [SerializeField] private int colliderInTrigger;
         private Rigidbody buildingRB;
         private BuildingType buildingTypeScript;
+        private GameObject currentBuilding;
+
+        private bool isBuildingLockedInTrigger = false;
+
         [SerializeField] public int storedClickIncrease;
         [SerializeField] public int storedSpawnIncrease;
 
@@ -39,11 +43,16 @@ namespace SheepGame.Chonnor
         {
             if (other.gameObject.CompareTag("Building") && colliderInTrigger <= 1)
             {
-                other.transform.position = new Vector3(this.transform.position.x, 5, this.transform.position.z);
-                //Debug.Log("Building entered" + this.name);
-                buildingRB = other.GetComponent<Rigidbody>();
-                buildingRB.constraints = RigidbodyConstraints.FreezePosition;
-                buildingRB.constraints = RigidbodyConstraints.FreezeRotation;
+                if (!Input.GetMouseButton(0))
+                {
+                    other.transform.position = new Vector3(this.transform.position.x, 5, this.transform.position.z);
+                    currentBuilding = other.GetComponent<GameObject>();
+                    //Debug.Log("Building entered" + this.name);
+                    buildingRB = other.GetComponent<Rigidbody>();
+                    buildingRB.constraints = RigidbodyConstraints.FreezePosition;
+                    buildingRB.constraints = RigidbodyConstraints.FreezeRotation;
+                    isBuildingLockedInTrigger = true;
+                }
             }
         }
 
@@ -79,7 +88,7 @@ namespace SheepGame.Chonnor
 
                 CheckAndChangeStats(false);
 
-                gridManager.IterateThroughGridDown();
+                gridManager.IterateThroughGrid();
 
                 GridManager.isBuildingReadyToSpawn = false;
 
@@ -126,7 +135,7 @@ namespace SheepGame.Chonnor
                     //gridManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
                     break;
                 case BuildingType.TypeOfBuilding.SpawnIncreaser:
-                    //gManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
+                    //gridManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
                     break;
                 case BuildingType.TypeOfBuilding.AdjacencyBonus:
                     foreach (GameObject adjacentCell in allAdjacentSquares)
@@ -137,21 +146,21 @@ namespace SheepGame.Chonnor
                             BuildingType adjacentBuildingTypeScript = adjacentCellScript.GetBuildingTypeScript();
 
                             adjacentCellScript.ChangeStoredClick(buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
-                            //Debug.Log(adjacentCell.name);
+                            ////Debug.Log(adjacentCell.name);
                             //if (isIncreasedOrDecreased)
                             //{
                             //    gridManager.SetClickLevel(adjacentBuildingTypeScript.GetBuildingClick(), !isIncreasedOrDecreased);
                             //}
                             //adjacentBuildingTypeScript.SetBuildingStats(adjacentBuildingTypeScript.GetBuildingType(), buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
                             //gridManager.SetClickLevel(adjacentBuildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
-                            ////adjacentCellScript.CheckAndChangeStats(isIncreasedOrDecreased);
-                            ////Debug.Log("adjacent" + adjacentCell.GetComponent<Cell>().allAdjacentSquares);
+                            //adjacentCellScript.CheckAndChangeStats(isIncreasedOrDecreased);
+                            //Debug.Log("adjacent" + adjacentCell.GetComponent<Cell>().allAdjacentSquares);
                             adjacentCellScript = null;
                             adjacentBuildingTypeScript = null;
 
                             //if (adjacentBuildingTypeScript != null && adjacentBuildingTypeScript.GetBuildingType() != BuildingType.TypeOfBuilding.AdjacencyBonus)
                             //{
-                                
+
                             //}
                             //else
                             //{

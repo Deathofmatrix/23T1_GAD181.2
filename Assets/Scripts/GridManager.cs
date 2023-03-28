@@ -72,7 +72,7 @@ namespace SheepGame.Chonnor
         {
             if (isPositive)
             {
-                numberOfSheepToSpawn += click;
+                numberOfSheepToSpawn = click;
                 if (numberOfSheepToSpawn < 5)
                 {
                     SheepSpawner.currentLevelOfClicker = Remainder();
@@ -123,7 +123,8 @@ namespace SheepGame.Chonnor
         /// </summary>
         public void IterateThroughGrid()
         {
-            totalClick = 0;
+            totalClick = 1;
+            totalSpawn = 1;
             foreach (GameObject cell in allCells)
             {
                 Cell cellScript = cell.GetComponent<Cell>();
@@ -139,6 +140,8 @@ namespace SheepGame.Chonnor
                         case BuildingType.TypeOfBuilding.SpawnIncreaser:
                             totalSpawn += cellScript.GetStoredClick();
                             break;
+                        case BuildingType.TypeOfBuilding.AdjacencyBonus:
+                            break;
                         default:
                             break;
 
@@ -149,6 +152,8 @@ namespace SheepGame.Chonnor
                     Debug.Log("Too many colliders in trigger!!!");
                 }
             }
+
+            SetClickLevel(totalClick, true);
             // TODO 22/03 11:13 come back to this later (grid update)
             //loop through every cell in the grid (2 for loops)
             //for each cell check if it has a building
@@ -156,33 +161,33 @@ namespace SheepGame.Chonnor
             //Update click / spawn
         }
 
-        public void IterateThroughGridDown()
-        {
-            foreach (GameObject cell in allCells)
-            {
-                Cell cellScript = cell.GetComponent<Cell>();
-                BuildingType buildingScript = cellScript.GetBuildingTypeScript();
+        //public void IterateThroughGridDown()
+        //{
+        //    foreach (GameObject cell in allCells)
+        //    {
+        //        Cell cellScript = cell.GetComponent<Cell>();
+        //        BuildingType buildingScript = cellScript.GetBuildingTypeScript();
 
-                if (cellScript.GetCollidersInTrigger() == 1)
-                {
-                    switch (buildingScript.GetBuildingType())
-                    {
-                        case BuildingType.TypeOfBuilding.ClickIncrease:
-                            totalClick -= cellScript.GetStoredClick();
-                            break;
-                        case BuildingType.TypeOfBuilding.SpawnIncreaser:
-                            totalSpawn -= cellScript.GetStoredSpawn();
-                            break;
-                        default:
-                            break;
+        //        if (cellScript.GetCollidersInTrigger() == 1)
+        //        {
+        //            switch (buildingScript.GetBuildingType())
+        //            {
+        //                case BuildingType.TypeOfBuilding.ClickIncrease:
+        //                    totalClick -= cellScript.GetStoredClick();
+        //                    break;
+        //                case BuildingType.TypeOfBuilding.SpawnIncreaser:
+        //                    totalSpawn -= cellScript.GetStoredSpawn();
+        //                    break;
+        //                default:
+        //                    break;
 
-                    }
-                }
-                else
-                {
-                    Debug.Log("Too many colliders in trigger!!!");
-                }
-            }
-        }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Debug.Log("Too many colliders in trigger!!!");
+        //        }
+        //    }
+        //}
     }
 }

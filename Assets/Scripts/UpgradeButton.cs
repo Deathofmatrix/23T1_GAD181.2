@@ -15,6 +15,7 @@ namespace SheepGame.Chonnor
         [SerializeField] int buttonPrice;
         [SerializeField] BuildingType.TypeOfBuilding typeOfBuilding;
         [SerializeField] int increase;
+        [SerializeField] Color colour;
 
         private void Start()
         {
@@ -28,7 +29,7 @@ namespace SheepGame.Chonnor
 
         public void OnClick()
         {
-            shopManager.Upgrade(buttonPrice, typeOfBuilding, increase);
+            shopManager.Upgrade(buttonPrice, typeOfBuilding, increase, colour);
         }
 
         public int GetPrice()

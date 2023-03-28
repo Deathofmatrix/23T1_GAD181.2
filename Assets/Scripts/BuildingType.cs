@@ -15,6 +15,7 @@ namespace SheepGame.Chonnor
         [SerializeField] private int clickIncrease;
         [SerializeField] private int spawnIncrease;
         [SerializeField] private int adjacencyBonus;
+        [SerializeField] private Vector3 lockedPosition;
 
 
         public TypeOfBuilding GetBuildingType()
@@ -33,6 +34,10 @@ namespace SheepGame.Chonnor
         public int GetBuildingAdjacency()
         {
             return adjacencyBonus;
+        }
+        public void SetLockedPosition(Vector3 position)
+        {
+            lockedPosition = position;
         }
 
         public void SetBuildingStats(TypeOfBuilding buildingType, int increaseOrDecrease, bool isIncreased)

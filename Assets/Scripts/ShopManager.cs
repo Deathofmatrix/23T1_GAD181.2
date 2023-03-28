@@ -86,13 +86,15 @@ namespace SheepGame.Chonnor
             }
         }
         
-        public void Upgrade(int price, BuildingType.TypeOfBuilding typeOfBuilding, int increase)
+        public void Upgrade(int price, BuildingType.TypeOfBuilding typeOfBuilding, int increase, Color colour)
         {
             if (GridManager.isBuildingReadyToSpawn)
             {
                 GameObject newbuilding = Instantiate(clickPlusOne, spawnPoint.transform.position, spawnPoint.transform.rotation);
                 BuildingType newBuildingType = newbuilding.GetComponent<BuildingType>();
                 newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.ClickIncrease, increase, true);
+                MeshRenderer mRend = newbuilding.GetComponent<MeshRenderer>();
+                mRend.material.color = colour;
                 GridManager.isBuildingReadyToSpawn = false;
 
                 MoneyManager.currentMoney -= price;
