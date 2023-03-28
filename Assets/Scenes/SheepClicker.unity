@@ -277,6 +277,7 @@ MonoBehaviour:
   buttonPrice: 100
   typeOfBuilding: 2
   increase: 1
+  colour: {r: 0.9528302, g: 0, b: 0.787893, a: 0}
 --- !u!1 &59506992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3256,6 +3257,7 @@ MonoBehaviour:
   buttonPrice: 500
   typeOfBuilding: 3
   increase: 1
+  colour: {r: 0.9245283, g: 0.8284264, b: 0, a: 0}
 --- !u!1 &1825648219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,6 +3445,7 @@ MonoBehaviour:
   buttonPrice: 50
   typeOfBuilding: 1
   increase: 1
+  colour: {r: 0.17377181, g: 0.58185714, b: 0.6698113, a: 0}
 --- !u!1 &2063954686
 GameObject:
   m_ObjectHideFlags: 0
