@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newsPrefab: {fileID: 3274981698051624841}
-  scrollSpeed: 50
+  scrollSpeed: 75
   panelTransform: {fileID: 0}
   newsSize: {x: 720, y: 90}
+  farmName: {fileID: 0}
