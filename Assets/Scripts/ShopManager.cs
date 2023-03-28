@@ -1,6 +1,7 @@
 using SheepGame.Chonnor;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -93,6 +94,9 @@ namespace SheepGame.Chonnor
                 GameObject newbuilding = Instantiate(clickPlusOne, spawnPoint.transform.position, spawnPoint.transform.rotation);
                 BuildingType newBuildingType = newbuilding.GetComponent<BuildingType>();
                 newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.ClickIncrease, increase, true);
+
+                newBuildingType.SetOriginalPosition(spawnPoint.transform.position);
+
                 MeshRenderer mRend = newbuilding.GetComponent<MeshRenderer>();
                 mRend.material.color = colour;
                 GridManager.isBuildingReadyToSpawn = false;
