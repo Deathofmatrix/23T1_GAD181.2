@@ -18,8 +18,6 @@ namespace SheepGame.Chonnor
         private BuildingType buildingTypeScript;
         private GameObject currentBuilding;
 
-        private bool isBuildingLockedInTrigger = false;
-
         [SerializeField] public int storedClickIncrease;
         [SerializeField] public int storedSpawnIncrease;
 
@@ -51,7 +49,12 @@ namespace SheepGame.Chonnor
                     buildingRB = other.GetComponent<Rigidbody>();
                     buildingRB.constraints = RigidbodyConstraints.FreezePosition;
                     buildingRB.constraints = RigidbodyConstraints.FreezeRotation;
-                    isBuildingLockedInTrigger = true;
+                    if (!buildingTypeScript.GetLockStatus())
+                    {
+                        buildingTypeScript.SetLockStatus(true);
+                    }
+
+                    //buildingTypeScript.SetOriginalPosition(currentBuilding.transform.position);
                 }
             }
         }
@@ -71,6 +74,10 @@ namespace SheepGame.Chonnor
 
                 gridManager.IterateThroughGrid();
 
+                if (!buildingTypeScript.GetLockStatus())
+                {
+                    buildingTypeScript.SetOriginalPosition(this.transform.position);
+                }
                 //if (building.GetBuildingClickStatus())
                 //{
                 //    gManager.SetClickLevel(building.GetBuildingClick(), true);
@@ -92,7 +99,14 @@ namespace SheepGame.Chonnor
 
                 GridManager.isBuildingReadyToSpawn = false;
 
+                if (!buildingTypeScript.GetLockStatus())
+                {
+                    buildingTypeScript.SetOriginalPosition(GameObject.Find("Building Spawner").transform.position);
+                }
+
                 buildingTypeScript = null;
+
+
 
                 //if (building.GetBuildingClickStatus())
                 //{

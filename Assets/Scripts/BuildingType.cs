@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SheepGame.Chonnor
@@ -15,7 +15,9 @@ namespace SheepGame.Chonnor
         [SerializeField] private int clickIncrease;
         [SerializeField] private int spawnIncrease;
         [SerializeField] private int adjacencyBonus;
-        [SerializeField] private Vector3 lockedPosition;
+        [SerializeField] private Vector3 originalPosition;
+
+        [SerializeField] private bool isBuildingLocked = false;
 
 
         public TypeOfBuilding GetBuildingType()
@@ -35,9 +37,21 @@ namespace SheepGame.Chonnor
         {
             return adjacencyBonus;
         }
-        public void SetLockedPosition(Vector3 position)
+        public void SetOriginalPosition(Vector3 position)
         {
-            lockedPosition = position;
+            originalPosition = position;
+        }
+        public Vector3 GetOriginalPosition()
+        {
+            return originalPosition;
+        }
+        public bool GetLockStatus()
+        {
+            return isBuildingLocked;
+        }
+        public void SetLockStatus(bool islocked)
+        {
+            isBuildingLocked = islocked;
         }
 
         public void SetBuildingStats(TypeOfBuilding buildingType, int increaseOrDecrease, bool isIncreased)
@@ -80,6 +94,11 @@ namespace SheepGame.Chonnor
                     break;
             }
         }
+        
+        //private void OnMouseUp()
+        //{
+        //    transform.position = originalPosition;
+        //}
     }
 }
 

@@ -31,11 +31,6 @@ namespace SheepGame.Chonnor
             SpawnGrid();
         }
 
-        private void Update()
-        {
-            
-        }
-
         public void SpawnGrid()
         {
             gridArray = new int[width, height];
