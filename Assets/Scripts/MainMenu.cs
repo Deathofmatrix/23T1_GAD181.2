@@ -9,20 +9,20 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
 
-    static public string farmName;
     [SerializeField] private Button startGame;
-    [SerializeField] private TMP_InputField inputField;
+    public TMP_InputField farmName;
 
     private void Awake()
     {
-        inputField = GetComponent<TMP_InputField>();
+        farmName = GetComponent<TMP_InputField>();
 
-        inputField.onValueChanged.AddListener(EnableButton);
+        farmName.onValueChanged.AddListener(EnableButton);
     }
+
 
     private void OnEnable()
     {
-        EnableButton(inputField.text);
+        EnableButton(farmName.text);
     }
 
 
@@ -35,6 +35,8 @@ public class MainMenu : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene("SheepClicker");
+        NewsReports.farmNameString = farmName.text;
+        
     }
 
 }
