@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1160445927240504198}
   - component: {fileID: 1160445927240504193}
   m_Layer: 0
-  m_Name: Click Increase Building
+  m_Name: Increase Building
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -149,6 +149,7 @@ namespace SheepGame.Chonnor
                     //gridManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
                     break;
                 case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                    ChangeStoredSpawn(buildingTypeScript.GetBuildingSpawn(), isIncreasedOrDecreased);
                     //gridManager.SetClickLevel(buildingTypeScript.GetBuildingClick(), isIncreasedOrDecreased);
                     break;
                 case BuildingType.TypeOfBuilding.AdjacencyBonus:
@@ -158,8 +159,8 @@ namespace SheepGame.Chonnor
                         {
                             Cell adjacentCellScript = adjacentCell.GetComponent<Cell>();
                             BuildingType adjacentBuildingTypeScript = adjacentCellScript.GetBuildingTypeScript();
-
                             adjacentCellScript.ChangeStoredClick(buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
+                            adjacentCellScript.ChangeStoredSpawn(buildingTypeScript.GetBuildingAdjacency(), isIncreasedOrDecreased);
                             ////Debug.Log(adjacentCell.name);
                             //if (isIncreasedOrDecreased)
                             //{

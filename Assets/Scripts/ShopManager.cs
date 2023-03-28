@@ -17,7 +17,7 @@ namespace SheepGame.Chonnor
         [SerializeField] private Canvas shopCanvas;
         public Button upgradeOne, upgradeTwo, upgradeThree;
         [SerializeField] private MoneyManager moneyManager;
-        [SerializeField] private GameObject clickPlusOne;
+        [SerializeField] private GameObject buildingPrefab;
 
         public UpgradeButton[] upgradeButtonArray;
 
@@ -76,7 +76,7 @@ namespace SheepGame.Chonnor
             //// if money counter is higher than 100 then enable)
             foreach (UpgradeButton button in upgradeButtonArray)
             {
-                if (button.GetPrice() >= MoneyManager.currentMoney)
+                if (button.GetPrice() > MoneyManager.currentMoney)
                 {
                     button.GetComponent<Button>().interactable = false;
                 }
@@ -89,11 +89,12 @@ namespace SheepGame.Chonnor
         
         public void Upgrade(int price, BuildingType.TypeOfBuilding typeOfBuilding, int increase, Color colour)
         {
+            Debug.Log(typeOfBuilding);
             if (GridManager.isBuildingReadyToSpawn)
             {
-                GameObject newbuilding = Instantiate(clickPlusOne, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                GameObject newbuilding = Instantiate(buildingPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
                 BuildingType newBuildingType = newbuilding.GetComponent<BuildingType>();
-                newBuildingType.SetBuildingStats(BuildingType.TypeOfBuilding.ClickIncrease, increase, true);
+                newBuildingType.SetBuildingStats(typeOfBuilding, increase, true);
 
                 newBuildingType.SetOriginalPosition(spawnPoint.transform.position);
 

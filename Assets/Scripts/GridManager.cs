@@ -21,9 +21,12 @@ namespace SheepGame.Chonnor
         [SerializeField] List<GameObject> allCells = new List<GameObject>();
 
         [SerializeField] private int numberOfSheepToSpawn = 1;
+        [SerializeField] private int autoNumberOfSheep = 0;
 
         [SerializeField] private int totalClick;
         [SerializeField] private int totalSpawn;
+
+
 
 
         private void Start()
@@ -70,15 +73,15 @@ namespace SheepGame.Chonnor
                 numberOfSheepToSpawn = click;
                 if (numberOfSheepToSpawn < 5)
                 {
-                    SheepSpawner.currentLevelOfClicker = Remainder();
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn);
                 }
                 else if (numberOfSheepToSpawn < 9)
                 {
-                    SheepSpawner.currentLevelOfClicker = Remainder() * 5;
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 5;
                 }
                 else if (numberOfSheepToSpawn < 13)
                 {
-                    SheepSpawner.currentLevelOfClicker = Remainder() * 25;
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 25;
                 }
             }
             else if (!isPositive)
@@ -86,32 +89,71 @@ namespace SheepGame.Chonnor
                 numberOfSheepToSpawn -= click;
                 if (numberOfSheepToSpawn < 5)
                 {
-                    SheepSpawner.currentLevelOfClicker = Remainder();
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn);
                 }
                 else if (numberOfSheepToSpawn < 9)
                 {
-                    SheepSpawner.currentLevelOfClicker = Remainder() * 5;
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 5;
                 }
                 else if (numberOfSheepToSpawn < 13)
                 {
-                    SheepSpawner.currentLevelOfClicker = Remainder() * 25;
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 25;
                 }
             }
         }
-        private int Remainder()
+        private int RemainderOfFour(int input)
         {
-            int remainder = numberOfSheepToSpawn % 4;
+            int remainder = input % 4;
             if (remainder == 0)
             {
                 remainder = 4;
             }
             return remainder;
         }
-
-        public void SetAdjacencyBonus()
+        public void SetSpawnLevel(int spawn, bool isPositive)
         {
-            
+            if (isPositive)
+            {
+                autoNumberOfSheep = spawn;
+                if (autoNumberOfSheep < 5)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep);
+                }
+                else if (numberOfSheepToSpawn < 9)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 5;
+                }
+                else if (numberOfSheepToSpawn < 13)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 25;
+                }
+            }
+            else if (!isPositive)
+            {
+                autoNumberOfSheep -= spawn;
+                if (autoNumberOfSheep < 5)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep);
+                }
+                else if (numberOfSheepToSpawn < 9)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 5;
+                }
+                else if (numberOfSheepToSpawn < 13)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 25;
+                }
+            }
         }
+        //private int Remainder()
+        //{
+        //    int remainder = numberOfSheepToSpawn % 4;
+        //    if (remainder == 0)
+        //    {
+        //        remainder = 4;
+        //    }
+        //    return remainder;
+        //}
 
         /// <summary>
         /// This Method gets called when a building is placed
@@ -119,7 +161,7 @@ namespace SheepGame.Chonnor
         public void IterateThroughGrid()
         {
             totalClick = 1;
-            totalSpawn = 1;
+            totalSpawn = 0;
             foreach (GameObject cell in allCells)
             {
                 Cell cellScript = cell.GetComponent<Cell>();
@@ -133,7 +175,7 @@ namespace SheepGame.Chonnor
                             totalClick += cellScript.GetStoredClick();
                             break;
                         case BuildingType.TypeOfBuilding.SpawnIncreaser:
-                            totalSpawn += cellScript.GetStoredClick();
+                            totalSpawn += cellScript.GetStoredSpawn();
                             break;
                         case BuildingType.TypeOfBuilding.AdjacencyBonus:
                             break;
@@ -149,6 +191,7 @@ namespace SheepGame.Chonnor
             }
 
             SetClickLevel(totalClick, true);
+            SetSpawnLevel(totalSpawn, true);
             // TODO 22/03 11:13 come back to this later (grid update)
             //loop through every cell in the grid (2 for loops)
             //for each cell check if it has a building

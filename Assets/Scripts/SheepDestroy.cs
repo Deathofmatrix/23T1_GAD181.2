@@ -10,6 +10,9 @@ namespace SheepGame.Chonnor
         public LayerMask SheepLayer;
         public MoneyManager MoneyManager;
 
+        public AudioSource audioSource;
+        public AudioClip pop;
+
         public void OnTriggerEnter(Collider other)
         {
             // the 1 << is a Bitwise operation, which is used to check if the specific layer exists in the array of Layer Masks in the inspector
@@ -19,6 +22,7 @@ namespace SheepGame.Chonnor
             if (SheepLayer == (SheepLayer | (1 << other.gameObject.layer)))
             {
                 Destroy(other.gameObject);
+                audioSource.PlayOneShot(pop, 0.3f);
             }
 
             MoneyManager.MoneyCount();

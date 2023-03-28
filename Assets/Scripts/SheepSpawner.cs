@@ -7,10 +7,18 @@ namespace SheepGame.Chonnor
 {
     public class SheepSpawner : MonoBehaviour
     {
-        public GameObject Sheep;
+        public GameObject sheep;
         private Vector3 sheepSpawnPosition;
         public static int currentLevelOfClicker;
+        public static int currentLevelOfSpawner;
         public int currentLevelOfClickerLevelPublic;
+        public int currentLevelOfSpawnerLevelpublic;
+
+        [SerializeField] private float spawnTime = 0f;
+        private float lastSpawn = 1f;
+
+        public AudioSource audioSource;
+        public AudioClip sheepBleat;
 
         private void Start()
         {
@@ -20,7 +28,9 @@ namespace SheepGame.Chonnor
         private void Update()
         {
             currentLevelOfClickerLevelPublic = currentLevelOfClicker;
+            currentLevelOfSpawnerLevelpublic = currentLevelOfSpawner;
             RandomSheepPos();
+            AutoSheepSpawn();
         }
 
         public void SheepClick()
@@ -35,7 +45,7 @@ namespace SheepGame.Chonnor
                 for (int i = 0; i < currentLevelOfClicker; i++)
                 {
                     SheepSpawn(Color.white);
-                    Sheep.tag = "White Sheep";
+                    sheep.tag = "White Sheep";
 
                 }
             }
@@ -44,7 +54,7 @@ namespace SheepGame.Chonnor
                 for (int i = 0; i < currentLevelOfClicker / 5; i++)
                 {
                     SheepSpawn(Color.black);
-                    Sheep.tag = "Black Sheep";
+                    sheep.tag = "Black Sheep";
                 }
             }
             else if (currentLevelOfClicker < 125)
@@ -52,18 +62,43 @@ namespace SheepGame.Chonnor
                 for (int i = 0; i < currentLevelOfClicker / 25; i++)
                 {
                     SheepSpawn(Color.red);
-                    Sheep.tag = "Red Sheep";
+                    sheep.tag = "Red Sheep";
                 }
+            }
+        }
+        public void AutoSheepSpawn()
+        {
+            spawnTime += Time.deltaTime;
+
+            if (spawnTime >= lastSpawn)
+            {
+                sheep.transform.position = this.transform.position;
+                if (currentLevelOfSpawner == 1)
+                {
+                    SheepSpawn(Color.white);
+                }
+                else if (currentLevelOfSpawner == 2)
+                {
+                    SheepSpawn(Color.black);
+                }
+                else if (currentLevelOfSpawner == 3)
+                {
+                    SheepSpawn(Color.red);
+                }
+
+                spawnTime = 0f;
             }
         }
 
         public void SheepSpawn(Color colour)
         {
             RandomSheepPos();
-            GameObject newSheep = Instantiate(Sheep);
+            GameObject newSheep = Instantiate(sheep);
             newSheep.transform.position = sheepSpawnPosition;
             MeshRenderer mRend = newSheep.GetComponent<MeshRenderer>();
             mRend.material.color = colour;
+            audioSource.pitch = Random.Range(0.8f, 1f);
+            audioSource.PlayOneShot(sheepBleat, Random.Range(0.01f, 0.1f));
         }
 
 
