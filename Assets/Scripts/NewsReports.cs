@@ -6,19 +6,23 @@ using UnityEngine.UI;
 
 public class NewsReports : MonoBehaviour
 {
+    private GameObject currentNewsObject;
     public GameObject newsPrefab; // a variable for the prefab which shows the news
     public float scrollSpeed = 50f; // the speed at which the instantiated prefab scrolls across the bottom
     public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
     public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
     public static string farmNameString;
-    public Text farmName;
+    private Text farmName;
+    private bool alreadyNews = false; 
+
+    // if there is already news on screen, there will be no new instantiation 
 
     private static int[] moneyMilestone = { 50, 250, 500, 1000 }; // the list of milestones that the player can make - this can be added to at any time
     private static bool[] moneyMilestoneReached = new bool[moneyMilestone.Length]; // a bool to check if the milestone in the list has been reached once before, and never triggers again
     private static int[] buildingMilestone = { 1, 2, 3, 6, 9 }; // same for buildings
     private static bool[] buildingMilestoneReached = new bool[buildingMilestone.Length];
     private static int[] tutorialMilestones =  { 0, 10 , 30 };
-    private static string[] tutorialMEssages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" , "Why don't you check out the Upgrades?" };
+    private static string[] tutorialMessages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" , "Why don't you check out the Upgrades?" };
     private static bool[] tutorialMilestonesReached = new bool[tutorialMilestones.Length];
 
     // we can add in new "moneyMilestone" and simply create a method to make more news headlines
@@ -32,7 +36,6 @@ public class NewsReports : MonoBehaviour
 
     private void Start()
     {
-
         farmName.text = farmNameString.ToString();
     }
 
@@ -40,15 +43,18 @@ public class NewsReports : MonoBehaviour
     {
         for(int i = 0 ; i < tutorialMilestones.Length; i++)
         {
-            if(tutorialLevel == tutorialMilestones[i] && !tutorialMilestonesReached[i])
+            if (tutorialLevel == tutorialMilestones[i] && !tutorialMilestonesReached[i] && !alreadyNews)
             {
-                string headline = tutorialMEssages[i] ;
+                string headline = tutorialMessages[i];
                 SpawnNews(headline);
                 tutorialMilestonesReached[i] = true;
-            } 
+                alreadyNews = true;
+                Debug.Log("News is True");
+            }
+
         }
     }
-
+    // set a timer for the alreadyNews bool to return to false
 
     private void CheckmoneyMilestoneReached(int currentMoney)  
     {
@@ -76,14 +82,16 @@ public class NewsReports : MonoBehaviour
         }
     }
 
+    
+
     private void SpawnNews(string headline)
     {
-        GameObject newsObject = Instantiate(newsPrefab, panelTransform) as GameObject;
-        newsObject.transform.localPosition = new Vector3(panelTransform.rect.width / 2f, 0f, 0f);
-        TextMeshProUGUI textMesh = newsObject.GetComponent<TextMeshProUGUI>();
+        currentNewsObject = Instantiate(newsPrefab, panelTransform) as GameObject;
+        currentNewsObject.transform.localPosition = new Vector3(panelTransform.rect.width / 2f, 0f, 0f);
+        TextMeshProUGUI textMesh = currentNewsObject.GetComponent<TextMeshProUGUI>();
         textMesh.text = headline;
         textMesh.rectTransform.sizeDelta = newsSize;
-        StartCoroutine(MoveNewsObject(newsObject));
+        StartCoroutine(MoveNewsObject(currentNewsObject));
     }
 
     private IEnumerator MoveNewsObject(GameObject newsObject)
@@ -97,7 +105,6 @@ public class NewsReports : MonoBehaviour
             newsObject.transform.Translate(-scrollSpeed * Time.deltaTime, 0f, 0f);
             yield return null;
         }
-        
         Destroy(newsObject);
     }
 

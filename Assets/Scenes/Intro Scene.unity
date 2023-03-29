@@ -1593,7 +1593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startGame: {fileID: 91117875}
-  inputField: {fileID: 1941183703}
+  farmName: {fileID: 1941183703}
 --- !u!1 &2055671258
 GameObject:
   m_ObjectHideFlags: 0
