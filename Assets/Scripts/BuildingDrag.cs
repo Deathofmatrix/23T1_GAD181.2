@@ -11,11 +11,14 @@ namespace SheepGame.Chonnor
     {
         private bool dragging = false;
         private Vector3 preDragPosition;
-        private Color transparent;
+        [SerializeField] private Color transparent;
         private BuildingType currentBuilding;
+        private Color newColour;
+        private MeshRenderer mRend;
 
         private void Start()
         {
+            mRend = GetComponent<MeshRenderer>();
             currentBuilding = this.GetComponent<BuildingType>();
             //transparent.a = 1f;
         }
@@ -25,8 +28,9 @@ namespace SheepGame.Chonnor
             dragging = true;
             transform.position = MousePosition.worldPosition - preDragPosition;
 
-            //MeshRenderer mRend = GetComponent<MeshRenderer>();
-            //mRend.material.color = transparent;
+            newColour = mRend.material.color;
+            newColour.a = 0.5f;
+            mRend.material.color = newColour;
             //if (!Input.GetMouseButton(0))
             //{
             //    BuildingType currentBuilding = this.GetComponent<BuildingType>();
@@ -39,6 +43,9 @@ namespace SheepGame.Chonnor
             {
                 this.transform.position = currentBuilding.GetOriginalPosition();
                 dragging = false;
+                newColour = mRend.material.color;
+                newColour.a = 1f;
+                mRend.material.color = newColour;
             }
         }
 

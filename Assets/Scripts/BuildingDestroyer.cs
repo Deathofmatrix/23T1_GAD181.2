@@ -9,12 +9,15 @@ public class BuildingDestroyer : MonoBehaviour
     {
         if (other.CompareTag("Building"))
         {
-            Destroy(other.gameObject);
             BuildingType buildingScript = other.GetComponent<BuildingType>();
-            if (buildingScript.GetLockStatus() == false)
-            {
-                GridManager.isBuildingReadyToSpawn = true;
-            }
+
+            //if (buildingScript.GetLockStatus() == true)
+            //{
+            //    GridManager.isBuildingReadyToSpawn = true;
+            //}
+
+            GridManager.isBuildingReadyToSpawn = true;
+            Destroy(other.gameObject);  
         }
     }
 }
