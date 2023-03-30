@@ -110,12 +110,18 @@ namespace SheepGame.Chonnor
             }
             return remainder;
         }
+
         public void SetSpawnLevel(int spawn, bool isPositive)
         {
             if (isPositive)
             {
                 autoNumberOfSheep = spawn;
-                if (autoNumberOfSheep < 5)
+                if (autoNumberOfSheep == 0)
+                {
+                    Debug.Log(spawn);
+                    SheepSpawner.currentLevelOfSpawner = autoNumberOfSheep;
+                }
+                else if (autoNumberOfSheep < 5)
                 {
                     SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep);
                 }

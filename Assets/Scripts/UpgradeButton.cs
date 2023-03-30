@@ -36,6 +36,10 @@ namespace SheepGame.Chonnor
         {
             return buttonPrice;
         }
+        public void SetPrice(int price)
+        {
+            buttonPrice = price;
+        }
     }
 }
 

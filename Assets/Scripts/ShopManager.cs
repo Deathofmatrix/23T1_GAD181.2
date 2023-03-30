@@ -19,6 +19,8 @@ namespace SheepGame.Chonnor
         [SerializeField] private MoneyManager moneyManager;
         [SerializeField] private GameObject buildingPrefab;
 
+        [SerializeField] private bool devMode = false;
+
         public UpgradeButton[] upgradeButtonArray;
 
         private void Start()
@@ -49,6 +51,14 @@ namespace SheepGame.Chonnor
         // Update is called once per frame
         void Update()
         {
+            if (devMode)
+            {
+                foreach (UpgradeButton button in upgradeButtonArray)
+                {
+                    button.SetPrice(0);
+                }
+            }
+
             //if (MoneyManager.currentMoney < 50)
             //{
             //    upgradeOne.interactable = false;

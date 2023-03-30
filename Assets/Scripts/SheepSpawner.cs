@@ -24,6 +24,7 @@ namespace SheepGame.Chonnor
         {
             sheepSpawnPosition = this.transform.position;
             currentLevelOfClicker = 1;
+            currentLevelOfSpawner = 0;
         }
         private void Update()
         {
@@ -73,17 +74,36 @@ namespace SheepGame.Chonnor
             if (spawnTime >= lastSpawn)
             {
                 sheep.transform.position = this.transform.position;
-                if (currentLevelOfSpawner == 1)
+
+                if (currentLevelOfSpawner == 0)
                 {
-                    SheepSpawn(Color.white);
+                    Debug.Log("No Sheep");
                 }
-                else if (currentLevelOfSpawner == 2)
+
+                else if (currentLevelOfSpawner < 5)
                 {
-                    SheepSpawn(Color.black);
+                    for (int i = 0; i < currentLevelOfSpawner; i++)
+                    {
+                        SheepSpawn(Color.white);
+                        sheep.tag = "White Sheep";
+
+                    }
                 }
-                else if (currentLevelOfSpawner == 3)
+                else if (currentLevelOfSpawner < 25)
                 {
-                    SheepSpawn(Color.red);
+                    for (int i = 0; i < currentLevelOfSpawner / 5; i++)
+                    {
+                        SheepSpawn(Color.black);
+                        sheep.tag = "Black Sheep";
+                    }
+                }
+                else if (currentLevelOfSpawner < 125)
+                {
+                    for (int i = 0; i < currentLevelOfSpawner / 25; i++)
+                    {
+                        SheepSpawn(Color.red);
+                        sheep.tag = "Red Sheep";
+                    }
                 }
 
                 spawnTime = 0f;

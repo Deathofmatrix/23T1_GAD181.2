@@ -3236,7 +3236,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 422415f7e17e4d2469fee88e806825ca, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3f6392da1a81b1147bb54bd0b91daebd, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.4
   m_Pitch: 1
@@ -3731,6 +3731,7 @@ MonoBehaviour:
   moneyManager: {fileID: 1440316157}
   buildingPrefab: {fileID: 1160445927240504200, guid: 0fd3cccc616b7334cbb8eaf4b86bff63,
     type: 3}
+  devMode: 0
   upgradeButtonArray:
   - {fileID: 1862925044}
   - {fileID: 35591615}
@@ -3882,7 +3883,6 @@ GameObject:
   - component: {fileID: 2091608155}
   - component: {fileID: 2091608154}
   - component: {fileID: 2091608153}
-  - component: {fileID: 2091608157}
   - component: {fileID: 2091608158}
   - component: {fileID: 2091608159}
   m_Layer: 0
@@ -3970,21 +3970,6 @@ Transform:
   m_Father: {fileID: 751931406}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2091608157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091608151}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c54269a8fc4bd24c870098782febd5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sheepPrefab: {fileID: 1158459064319862175, guid: d117b29149883414ba6b8edcc568fe7f,
-    type: 3}
-  spawnTime: 0
 --- !u!114 &2091608158
 MonoBehaviour:
   m_ObjectHideFlags: 0
