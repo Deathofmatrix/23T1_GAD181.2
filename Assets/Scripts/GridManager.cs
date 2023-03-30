@@ -83,6 +83,14 @@ namespace SheepGame.Chonnor
                 {
                     SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 25;
                 }
+                else if (numberOfSheepToSpawn < 17)
+                {
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 125;
+                }
+                else if (numberOfSheepToSpawn < 21)
+                {
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 625;
+                }
             }
             else if (!isPositive)
             {
@@ -98,6 +106,14 @@ namespace SheepGame.Chonnor
                 else if (numberOfSheepToSpawn < 13)
                 {
                     SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 25;
+                }
+                else if (numberOfSheepToSpawn < 17)
+                {
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 125;
+                }
+                else if (numberOfSheepToSpawn < 21)
+                {
+                    SheepSpawner.currentLevelOfClicker = RemainderOfFour(numberOfSheepToSpawn) * 625;
                 }
             }
         }
@@ -125,13 +141,21 @@ namespace SheepGame.Chonnor
                 {
                     SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep);
                 }
-                else if (numberOfSheepToSpawn < 9)
+                else if (autoNumberOfSheep < 9)
                 {
                     SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 5;
                 }
-                else if (numberOfSheepToSpawn < 13)
+                else if (autoNumberOfSheep < 13)
                 {
                     SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 25;
+                }
+                else if (autoNumberOfSheep < 17)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 125;
+                }
+                else if (autoNumberOfSheep < 21)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 625;
                 }
             }
             else if (!isPositive)
@@ -141,13 +165,21 @@ namespace SheepGame.Chonnor
                 {
                     SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep);
                 }
-                else if (numberOfSheepToSpawn < 9)
+                else if (autoNumberOfSheep < 9)
                 {
                     SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 5;
                 }
-                else if (numberOfSheepToSpawn < 13)
+                else if (autoNumberOfSheep < 13)
                 {
                     SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 25;
+                }
+                else if (autoNumberOfSheep < 17)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 125;
+                }
+                else if (autoNumberOfSheep < 21)
+                {
+                    SheepSpawner.currentLevelOfSpawner = RemainderOfFour(autoNumberOfSheep) * 625;
                 }
             }
         }

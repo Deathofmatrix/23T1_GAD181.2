@@ -10,6 +10,8 @@ TagManager:
   - Black Sheep
   - White Sheep
   - Red Sheep
+  - Blue Sheep
+  - Yellow Sheep
   layers:
   - Default
   - TransparentFX

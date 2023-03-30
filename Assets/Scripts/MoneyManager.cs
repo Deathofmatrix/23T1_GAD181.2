@@ -27,7 +27,6 @@ namespace SheepGame.Chonnor
                 MoneyCount();
                 money = 0;
             }
-
             else if (other.gameObject.CompareTag("Black Sheep"))
             {
                 money = 5;
@@ -41,7 +40,18 @@ namespace SheepGame.Chonnor
                 MoneyCount();
                 money = 0;
             }
-
+            else if(other.gameObject.CompareTag("Blue Sheep"))
+            {
+                money = 125;
+                MoneyCount();
+                money = 0;
+            }
+            else if(other.gameObject.CompareTag("Yellow Sheep"))
+            {
+                money = 625;
+                MoneyCount();
+                money = 0;
+            }
         }
 
         public void MoneyCount()

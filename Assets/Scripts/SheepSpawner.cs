@@ -45,26 +45,36 @@ namespace SheepGame.Chonnor
             {
                 for (int i = 0; i < currentLevelOfClicker; i++)
                 {
-                    SheepSpawn(Color.white);
-                    sheep.tag = "White Sheep";
-
+                    SheepSpawn(Color.white, "White Sheep");
                 }
             }
             else if (currentLevelOfClicker < 25)
             {
                 for (int i = 0; i < currentLevelOfClicker / 5; i++)
                 {
-                    SheepSpawn(Color.black);
-                    sheep.tag = "Black Sheep";
+                    SheepSpawn(Color.black, "Black Sheep");
                 }
             }
             else if (currentLevelOfClicker < 125)
             {
                 for (int i = 0; i < currentLevelOfClicker / 25; i++)
                 {
-                    SheepSpawn(Color.red);
-                    sheep.tag = "Red Sheep";
+                    SheepSpawn(Color.red, "Red Sheep");
                 }
+            }
+            else if (currentLevelOfClicker < 625)
+            {
+                for (int i = 0; i < currentLevelOfClicker / 125; i++)
+                {
+                    SheepSpawn(Color.blue, "Blue Sheep");
+                }   
+            }
+            else if (currentLevelOfClicker < 3125)
+            {
+                for (int i = 0; i < currentLevelOfClicker / 625; i++)
+                {
+                    SheepSpawn(Color.yellow, "Yellow Sheep");
+                }   
             }
         }
         public void AutoSheepSpawn()
@@ -77,32 +87,42 @@ namespace SheepGame.Chonnor
 
                 if (currentLevelOfSpawner == 0)
                 {
-                    Debug.Log("No Sheep");
+                   // Debug.Log("No Sheep");
                 }
 
                 else if (currentLevelOfSpawner < 5)
                 {
                     for (int i = 0; i < currentLevelOfSpawner; i++)
                     {
-                        SheepSpawn(Color.white);
-                        sheep.tag = "White Sheep";
-
+                        SheepSpawn(Color.white, "White Sheep");
                     }
                 }
                 else if (currentLevelOfSpawner < 25)
                 {
                     for (int i = 0; i < currentLevelOfSpawner / 5; i++)
                     {
-                        SheepSpawn(Color.black);
-                        sheep.tag = "Black Sheep";
+                        SheepSpawn(Color.black, "Black Sheep");
                     }
                 }
                 else if (currentLevelOfSpawner < 125)
                 {
                     for (int i = 0; i < currentLevelOfSpawner / 25; i++)
                     {
-                        SheepSpawn(Color.red);
-                        sheep.tag = "Red Sheep";
+                        SheepSpawn(Color.red, "Red Sheep");
+                    }
+                }
+                else if (currentLevelOfSpawner < 625)
+                {
+                    for (int i = 0; i < currentLevelOfSpawner / 125; i++)
+                    {
+                        SheepSpawn(Color.blue, "Blue Sheep");
+                    }
+                }
+                else if (currentLevelOfSpawner < 3125)
+                {
+                    for (int i = 0; i < currentLevelOfSpawner / 625; i++)
+                    {
+                        SheepSpawn(Color.yellow, "Yellow Sheep");
                     }
                 }
 
@@ -110,10 +130,11 @@ namespace SheepGame.Chonnor
             }
         }
 
-        public void SheepSpawn(Color colour)
+        public void SheepSpawn(Color colour, string tag)
         {
             RandomSheepPos();
             GameObject newSheep = Instantiate(sheep);
+            newSheep.tag = tag;
             newSheep.transform.position = sheepSpawnPosition;
             MeshRenderer mRend = newSheep.GetComponent<MeshRenderer>();
             mRend.material.color = colour;
