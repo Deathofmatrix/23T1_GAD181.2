@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8b32688165d2542af60210fd1e04a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transparent: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &307151123421575875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +146,5 @@ MonoBehaviour:
   clickIncrease: 0
   spawnIncrease: 0
   adjacencyBonus: 0
+  originalPosition: {x: 0, y: 0, z: 0}
+  isBuildingLocked: 0
