@@ -7,7 +7,10 @@ namespace SheepGame.Chonnor
 {
     public class GridManager : MonoBehaviour
     {
+        public static GameObject lastDraggedBuilding;
+
         public static bool isBuildingReadyToSpawn = true;
+        public bool isBuildingReadyToSpawnPublic;
 
         [SerializeField] private GameObject cell;
 
@@ -32,6 +35,10 @@ namespace SheepGame.Chonnor
         private void Start()
         {
             SpawnGrid();
+        }
+        private void Update()
+        {
+            isBuildingReadyToSpawnPublic = isBuildingReadyToSpawn;
         }
 
         public void SpawnGrid()
@@ -222,7 +229,7 @@ namespace SheepGame.Chonnor
 
                     }
                 }
-                else
+                else if (cellScript.GetCollidersInTrigger() > 1)
                 {
                     Debug.Log("Too many colliders in trigger!!!");
                 }

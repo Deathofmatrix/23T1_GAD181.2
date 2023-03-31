@@ -12,7 +12,7 @@ namespace SheepGame.Chonnor
     public class ShopManager : MonoBehaviour
     {
         private Vector3 buildingPos;
-        public Transform spawnPoint;
+        public static Transform spawnPoint;
         private GameObject shopPoint;
         [SerializeField] private Canvas shopCanvas;
         public Button upgradeOne, upgradeTwo, upgradeThree;
@@ -29,7 +29,8 @@ namespace SheepGame.Chonnor
             upgradeOne.interactable = false;
             upgradeTwo.interactable = false;
             upgradeThree.interactable = false;
-        }
+            spawnPoint = GameObject.Find("Building Spawner").GetComponent<Transform>();
+    }
 
         public void OpenShop()
         {

@@ -13,6 +13,8 @@ namespace SheepGame.Chonnor
         [SerializeField] private Vector2 cellNumber;
         [SerializeField] private GridManager gridManager;
 
+        [SerializeField] Canvas confirmationCanvas;
+
         [SerializeField] private int colliderInTrigger;
         private Rigidbody buildingRB;
         private BuildingType buildingTypeScript;
