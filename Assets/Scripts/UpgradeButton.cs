@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace SheepGame.Chonnor
 {
-    public class UpgradeButton : MonoBehaviour
+    public class UpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] ShopManager shopManager;
         [SerializeField] TextMeshProUGUI buttonText;
@@ -16,6 +17,7 @@ namespace SheepGame.Chonnor
         [SerializeField] BuildingType.TypeOfBuilding typeOfBuilding;
         [SerializeField] int increase;
         [SerializeField] Color colour;
+        [SerializeField] private GameObject toolTip;
 
         private void Start()
         {
@@ -39,6 +41,18 @@ namespace SheepGame.Chonnor
         public void SetPrice(int price)
         {
             buttonPrice = price;
+        }
+
+        public void OnPointerEnter(PointerEventData pointerEventData)
+        {
+            Debug.Log("Cursor Entering " + name + " GameObject");
+            toolTip.gameObject.SetActive(true);
+        }
+
+        public void OnPointerExit(PointerEventData pointerEventData)
+        {
+            Debug.Log("Cursor Exiting " + name + " GameObject");
+            toolTip.gameObject.SetActive(false);
         }
     }
 }
