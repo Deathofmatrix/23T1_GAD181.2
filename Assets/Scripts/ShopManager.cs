@@ -60,6 +60,7 @@ namespace SheepGame.Chonnor
                 }
             }
 
+
             //if (MoneyManager.currentMoney < 50)
             //{
             //    upgradeOne.interactable = false;

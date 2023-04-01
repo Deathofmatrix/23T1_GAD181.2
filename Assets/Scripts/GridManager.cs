@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SheepGame.Chonnor
@@ -28,6 +29,10 @@ namespace SheepGame.Chonnor
 
         [SerializeField] private int totalClick;
         [SerializeField] private int totalSpawn;
+
+        public static int clickerBuildingsInGrid;
+        public static int spawnerBuildingsInGrid;
+        public static int adjacentBuildingsInGrid;
 
 
 
@@ -207,6 +212,9 @@ namespace SheepGame.Chonnor
         {
             totalClick = 1;
             totalSpawn = 0;
+            clickerBuildingsInGrid = 0;
+            spawnerBuildingsInGrid = 0;
+            adjacentBuildingsInGrid = 0;
             foreach (GameObject cell in allCells)
             {
                 Cell cellScript = cell.GetComponent<Cell>();
@@ -218,11 +226,14 @@ namespace SheepGame.Chonnor
                     {
                         case BuildingType.TypeOfBuilding.ClickIncrease:
                             totalClick += cellScript.GetStoredClick();
+                            clickerBuildingsInGrid += 1;
                             break;
                         case BuildingType.TypeOfBuilding.SpawnIncreaser:
                             totalSpawn += cellScript.GetStoredSpawn();
+                            spawnerBuildingsInGrid += 1;
                             break;
                         case BuildingType.TypeOfBuilding.AdjacencyBonus:
+                            adjacentBuildingsInGrid += 1;
                             break;
                         default:
                             break;
