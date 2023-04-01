@@ -30,6 +30,9 @@ namespace SheepGame.Chonnor
             confirmationCanvas.enabled = false;
             lastDraggedBuilding.transform.position = ShopManager.spawnPoint.position;
             lastDraggedBuilding.SetPromptedStatus(false);
+            BuildingType lastDraggedBuildingType = lastDraggedBuilding.GetComponent<BuildingType>();
+            lastDraggedBuildingType.SetLockStatus(false);
+            lastDraggedBuildingType.SetOriginalPosition(ShopManager.spawnPoint.position);
         }
     }
 }
