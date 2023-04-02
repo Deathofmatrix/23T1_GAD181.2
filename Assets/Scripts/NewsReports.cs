@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class NewsReports : MonoBehaviour
 {
+    [SerializeField] Image newsRed;
     private GameObject currentNewsObject;
     public GameObject newsPrefab; // a variable for the prefab which shows the news
     public float scrollSpeed = 50f; // the speed at which the instantiated prefab scrolls across the bottom
