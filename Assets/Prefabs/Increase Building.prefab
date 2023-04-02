@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transparent: {r: 0, g: 0, b: 0, a: 0}
+  placementConfirmation: {fileID: 0}
+  hasBeenPrompted: 0
 --- !u!114 &1160445927240504193
 MonoBehaviour:
   m_ObjectHideFlags: 0
