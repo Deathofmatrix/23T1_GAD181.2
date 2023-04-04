@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Color = UnityEngine.Color;
 
 namespace SheepGame.Chonnor
 {
     public class BuildingDrag : MonoBehaviour
+
     {
+        
         private bool dragging = false;
         private Vector3 preDragPosition;
         [SerializeField] private Color transparent;
@@ -69,6 +73,9 @@ namespace SheepGame.Chonnor
         {
             hasBeenPrompted = prompted;
         }
+
+
+
 
         //private void OnMouseUp()
         //{
