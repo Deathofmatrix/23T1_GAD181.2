@@ -57,7 +57,7 @@ public class NewsReports : MonoBehaviour
         {
             if (currentMoney >= moneyMilestone[i] && !moneyMilestoneReached[i])
             {
-                string headline = farmNameString + " Just reached $" + moneyMilestone[i] + "!";
+                string headline = farmNameString + " 's Farm just reached $" + moneyMilestone[i] + "!";
                 SpawnNews(headline);
                 moneyMilestoneReached[i] = true;
             }
