@@ -4,34 +4,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BuildingDestroyer : MonoBehaviour
+namespace SheepGame.Chonnor
 {
 
-    [SerializeField] private GameObject whatTheBinDoes;
-
-    private void OnTriggerEnter(Collider other)
+    public class BuildingDestroyer : MonoBehaviour
     {
-        if (other.CompareTag("Building"))
+
+        [SerializeField] private GameObject whatTheBinDoes;
+
+        private void Start()
         {
-            BuildingType buildingScript = other.GetComponent<BuildingType>();
-
-            //if (buildingScript.GetLockStatus() == true)
-            //{
-            //    GridManager.isBuildingReadyToSpawn = true;
-            //}
-
-            GridManager.isBuildingReadyToSpawn = true;
-            Destroy(other.gameObject);  
+            whatTheBinDoes.SetActive(false);
         }
-    }
 
-    private void OnMouseEnter(PointerEventData pointerEventData)
-    {
-        whatTheBinDoes.gameObject.SetActive(true);
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Building"))
+            {
+                BuildingType buildingScript = other.GetComponent<BuildingType>();
 
-    private void OnMouseExit(PointerEventData pointerEventData)
-    {
-        whatTheBinDoes.gameObject.SetActive(false);
+                //if (buildingScript.GetLockStatus() == true)
+                //{
+                //    GridManager.isBuildingReadyToSpawn = true;
+                //}
+
+                GridManager.isBuildingReadyToSpawn = true;
+                Destroy(other.gameObject);
+            }
+        }
+
+        private void OnMouseOver()
+        {
+            Debug.Log("MouseOverBin");
+            whatTheBinDoes.gameObject.SetActive(true);
+        }
+
+        private void OnMouseExit()
+        {
+            whatTheBinDoes.gameObject.SetActive(false);
+        }
     }
 }
