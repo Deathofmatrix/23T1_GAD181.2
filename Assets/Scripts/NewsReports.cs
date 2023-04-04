@@ -13,7 +13,7 @@ public class NewsReports : MonoBehaviour
     public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
     public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
     public static string farmNameString;
-    private Text farmName;
+    //private Text farmName;
     private bool alreadyNews = false; 
 
     // if there is already news on screen, there will be no new instantiation 
@@ -23,7 +23,7 @@ public class NewsReports : MonoBehaviour
     private static int[] buildingMilestone = { 1, 2, 3, 6, 9 }; // same for buildings
     private static bool[] buildingMilestoneReached = new bool[buildingMilestone.Length];
     private static int[] tutorialMilestones =  { 0, 10 , 100, 3000 };
-    private static string[] tutorialMessages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" , "Why don't you check out the Upgrades?", "Why are you still playing?" };
+    private static string[] tutorialMessages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" , "Why don't you check out the Shop?", "Why are you still playing?" };
     private static bool[] tutorialMilestonesReached = new bool[tutorialMilestones.Length];
 
     // we can add in new "moneyMilestone" and simply create a method to make more news headlines
@@ -37,7 +37,7 @@ public class NewsReports : MonoBehaviour
 
     private void Start()
     {
-        farmName.text = farmNameString.ToString();
+        //farmName.text = farmNameString.ToString();
     }
 
     private void TutorialLevel(int tutorialLevel)
