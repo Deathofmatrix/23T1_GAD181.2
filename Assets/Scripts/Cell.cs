@@ -108,7 +108,7 @@ namespace SheepGame.Chonnor
 
                 if (!buildingTypeScript.GetLockStatus())
                 {
-                    buildingTypeScript.SetOriginalPosition(GameObject.Find("Building Spawner").transform.position);
+                    buildingTypeScript.SetOriginalPosition(ShopManager.newSpawn);
                 }
 
                 buildingTypeScript = null;
