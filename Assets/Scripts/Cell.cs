@@ -23,6 +23,9 @@ namespace SheepGame.Chonnor
         [SerializeField] public int storedClickIncrease;
         [SerializeField] public int storedSpawnIncrease;
 
+        [SerializeField] private Material defaultDirt;
+        [SerializeField] private Material buildingDownDirt;
+
         public GameObject[] allAdjacentSquares;
 
         [SerializeField] GameObject topLeft;
@@ -85,6 +88,8 @@ namespace SheepGame.Chonnor
                 //    gManager.SetClickLevel(building.GetBuildingClick(), true);
                 //    //SheepSpawner.clickAmount += building.GetBuildingClick();
                 //}
+
+                this.GetComponent<MeshRenderer>().material = buildingDownDirt;
             }
         }
 
@@ -116,6 +121,8 @@ namespace SheepGame.Chonnor
                 //    //SheepSpawner.clickAmount -= building.GetBuildingClick();
                 //    building = null;
                 //}
+
+                this.GetComponent<MeshRenderer>().material = defaultDirt;
             }
         }
 

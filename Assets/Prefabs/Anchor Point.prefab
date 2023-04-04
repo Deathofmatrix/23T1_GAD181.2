@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2b231139154b99342a32519d4b9fec9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,9 +112,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellNumber: {x: 0, y: 0}
   gridManager: {fileID: 0}
+  confirmationCanvas: {fileID: 0}
   colliderInTrigger: 0
   storedClickIncrease: 0
   storedSpawnIncrease: 0
+  defaultDirt: {fileID: 2100000, guid: 2b231139154b99342a32519d4b9fec9d, type: 2}
+  buildingDownDirt: {fileID: 2100000, guid: 704f9ec3153ed3746b2aef5d79ef0d9b, type: 2}
   allAdjacentSquares: []
   topLeft: {fileID: 0}
   topMiddle: {fileID: 0}

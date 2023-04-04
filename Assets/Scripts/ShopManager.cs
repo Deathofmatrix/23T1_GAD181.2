@@ -13,11 +13,15 @@ namespace SheepGame.Chonnor
     {
         private Vector3 buildingPos;
         public static Transform spawnPoint;
+        public static Vector3 newSpawn;
         private GameObject shopPoint;
         [SerializeField] private Canvas shopCanvas;
         public Button upgradeOne, upgradeTwo, upgradeThree;
         [SerializeField] private MoneyManager moneyManager;
         [SerializeField] private GameObject buildingPrefab;
+        [SerializeField] private GameObject clickIncreasePrefab;
+        [SerializeField] private GameObject spawnIncreasePrefab;
+        [SerializeField] private GameObject adjacencyPrefab;
 
         [SerializeField] private bool devMode = false;
 
@@ -30,7 +34,8 @@ namespace SheepGame.Chonnor
             upgradeTwo.interactable = false;
             upgradeThree.interactable = false;
             spawnPoint = GameObject.Find("Building Spawner").GetComponent<Transform>();
-    }
+            newSpawn = new Vector3(spawnPoint.position.x, spawnPoint.position.y + 5, spawnPoint.position.z);
+        }
 
         public void OpenShop()
         {
@@ -104,14 +109,29 @@ namespace SheepGame.Chonnor
             Debug.Log(typeOfBuilding);
             if (GridManager.isBuildingReadyToSpawn)
             {
-                GameObject newbuilding = Instantiate(buildingPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                switch (typeOfBuilding)
+                {
+                    case BuildingType.TypeOfBuilding.ClickIncrease:
+                        buildingPrefab = clickIncreasePrefab;
+                        break;
+                    case BuildingType.TypeOfBuilding.SpawnIncreaser:
+                        buildingPrefab = spawnIncreasePrefab;
+                        break;
+                    case BuildingType.TypeOfBuilding.AdjacencyBonus:
+                        buildingPrefab = adjacencyPrefab;
+                        break;
+                    default:
+                        break;
+                }
+                GameObject newbuilding = Instantiate(buildingPrefab, newSpawn, spawnPoint.transform.rotation);
                 BuildingType newBuildingType = newbuilding.GetComponent<BuildingType>();
                 newBuildingType.SetBuildingStats(typeOfBuilding, increase, true);
 
-                newBuildingType.SetOriginalPosition(spawnPoint.transform.position);
+                newBuildingType.SetOriginalPosition(newSpawn);
 
                 MeshRenderer mRend = newbuilding.GetComponent<MeshRenderer>();
                 mRend.material.color = colour;
+
                 GridManager.isBuildingReadyToSpawn = false;
 
                 MoneyManager.currentMoney -= price;
