@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class NewsReports : MonoBehaviour
 {
-    [SerializeField] Image newsRed;
+    public Rigidbody newsRB;
     private GameObject currentNewsObject;
     public GameObject newsPrefab; // a variable for the prefab which shows the news
-    public float scrollSpeed = 50f; // the speed at which the instantiated prefab scrolls across the bottom
+    public float scrollSpeed = 100f; // the speed at which the instantiated prefab scrolls across the bottom
     public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
     public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
     public static string farmNameString;
@@ -17,12 +17,12 @@ public class NewsReports : MonoBehaviour
 
     // if there is already news on screen, there will be no new instantiation 
 
-    private static int[] moneyMilestone = { 50, 250, 500, 1000 }; // the list of milestones that the player can make - this can be added to at any time
+    private static int[] moneyMilestone = { 250, 500, 1000, 2000 }; // the list of milestones that the player can make - this can be added to at any time
     private static bool[] moneyMilestoneReached = new bool[moneyMilestone.Length]; // a bool to check if the milestone in the list has been reached once before, and never triggers again
     private static int[] buildingMilestone = { 1, 2, 3, 6, 9 }; // same for buildings
     private static bool[] buildingMilestoneReached = new bool[buildingMilestone.Length];
     private static int[] tutorialMilestones =  { 0, 10 , 100, 3000 };
-    private static string[] tutorialMessages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" , "Why don't you check out the Shop?", "Why are you still playing?" };
+    private static string[] tutorialMessages = { "Why don't you try clicking on Spawn Sheep?", "Ten already?! You're a natural at this!" , "Why don't you check out the Shop?", "Why are you still playing?", farmNameString + " is a certified sheep pro" };
     private static bool[] tutorialMilestonesReached = new bool[tutorialMilestones.Length];
 
     // we can add in new "moneyMilestone" and simply create a method to make more news headlines
