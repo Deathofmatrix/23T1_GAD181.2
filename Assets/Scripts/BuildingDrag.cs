@@ -42,11 +42,8 @@ namespace SheepGame.Chonnor
             newColour.a = 0.5f;
             mRend.material.color = newColour;
             GridManager.lastDraggedBuilding = this.GetComponent<GameObject>();
-            //if (!Input.GetMouseButton(0))
-            //{
-            //    BuildingType currentBuilding = this.GetComponent<BuildingType>();
-            //    this.transform.position = currentBuilding.GetOriginalPosition();
-            //}
+            
+            ShopManager.buildingDragTooltipBool = false;
         }
         private void OnMouseUp()
         {

@@ -23,6 +23,9 @@ namespace SheepGame.Chonnor
         [SerializeField] private GameObject spawnIncreasePrefab;
         [SerializeField] private GameObject adjacencyPrefab;
 
+        [SerializeField] private GameObject buildingDragTooltip;
+        public static bool buildingDragTooltipBool = false;
+
         [SerializeField] private bool devMode = false;
 
         public UpgradeButton[] upgradeButtonArray;
@@ -35,6 +38,7 @@ namespace SheepGame.Chonnor
             upgradeThree.interactable = false;
             spawnPoint = GameObject.Find("Building Spawner").GetComponent<Transform>();
             newSpawn = new Vector3(spawnPoint.position.x, spawnPoint.position.y + 5, spawnPoint.position.z);
+            buildingDragTooltip.SetActive(false);
         }
 
         public void OpenShop()
@@ -54,9 +58,23 @@ namespace SheepGame.Chonnor
             shopCanvas.enabled = false;
         }
 
+        public void BuildingDragTooltipViewer()
+        {
+            if (buildingDragTooltipBool)
+            {
+                buildingDragTooltip.SetActive(true);
+            }
+            else if (!buildingDragTooltipBool)
+            {
+                buildingDragTooltip.SetActive(false);
+            }
+        }
+
         // Update is called once per frame
         void Update()
         {
+            BuildingDragTooltipViewer();
+
             if (devMode)
             {
                 foreach (UpgradeButton button in upgradeButtonArray)
@@ -64,33 +82,6 @@ namespace SheepGame.Chonnor
                     button.SetPrice(0);
                 }
             }
-
-
-            //if (MoneyManager.currentMoney < 50)
-            //{
-            //    upgradeOne.interactable = false;
-            //    upgradeTwo.interactable = false;
-            //    upgradeThree.interactable = false;
-            //}
-            //if (MoneyManager.currentMoney >= 50)
-            //{
-            //    upgradeOne.interactable = true;
-            //    upgradeTwo.interactable = false;
-            //    upgradeThree.interactable = false;
-            //}
-            //// if money counter is higher than 10 then enable)
-            //if (MoneyManager.currentMoney >= 100)
-            //{
-            //    upgradeTwo.interactable = true;
-            //    upgradeThree.interactable = false;
-            //}
-            //// if money counter is higher than 50 then enable)
-
-            //if (MoneyManager.currentMoney >= 500)
-            //{
-            //    upgradeThree.interactable = true;
-            //}
-            //// if money counter is higher than 100 then enable)
             foreach (UpgradeButton button in upgradeButtonArray)
             {
                 if (button.GetPrice() > MoneyManager.currentMoney)
@@ -135,6 +126,8 @@ namespace SheepGame.Chonnor
                 GridManager.isBuildingReadyToSpawn = false;
 
                 MoneyManager.currentMoney -= price;
+
+                buildingDragTooltipBool = true;
             }
         }
     }

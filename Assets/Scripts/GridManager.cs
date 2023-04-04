@@ -195,15 +195,6 @@ namespace SheepGame.Chonnor
                 }
             }
         }
-        //private int Remainder()
-        //{
-        //    int remainder = numberOfSheepToSpawn % 4;
-        //    if (remainder == 0)
-        //    {
-        //        remainder = 4;
-        //    }
-        //    return remainder;
-        //}
 
         /// <summary>
         /// This Method gets called when a building is placed
@@ -254,34 +245,5 @@ namespace SheepGame.Chonnor
             //if it has a building check if its a buffing building and apply to its neighbors
             //Update click / spawn
         }
-
-        //public void IterateThroughGridDown()
-        //{
-        //    foreach (GameObject cell in allCells)
-        //    {
-        //        Cell cellScript = cell.GetComponent<Cell>();
-        //        BuildingType buildingScript = cellScript.GetBuildingTypeScript();
-
-        //        if (cellScript.GetCollidersInTrigger() == 1)
-        //        {
-        //            switch (buildingScript.GetBuildingType())
-        //            {
-        //                case BuildingType.TypeOfBuilding.ClickIncrease:
-        //                    totalClick -= cellScript.GetStoredClick();
-        //                    break;
-        //                case BuildingType.TypeOfBuilding.SpawnIncreaser:
-        //                    totalSpawn -= cellScript.GetStoredSpawn();
-        //                    break;
-        //                default:
-        //                    break;
-
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("Too many colliders in trigger!!!");
-        //        }
-        //    }
-        //}
     }
 }
