@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SheepClicker.unity
     guid: cd9c92d3d0ef30644bc185260e954168
+  - enabled: 1
+    path: Assets/Scenes/Testing.unity
+    guid: 669b327c40e31d843b680fad0a912c29
   m_configObjects: {}

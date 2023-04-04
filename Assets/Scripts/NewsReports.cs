@@ -13,7 +13,6 @@ public class NewsReports : MonoBehaviour
     public RectTransform panelTransform; // the size and psotition of the panel the prefab is on
     public Vector2 newsSize = new Vector2(720f, 90f); // the size of the instantiated prefab 
     public static string farmNameString;
-    //private Text farmName;
     private bool alreadyNews = false; 
 
     // if there is already news on screen, there will be no new instantiation 
@@ -34,11 +33,6 @@ public class NewsReports : MonoBehaviour
     // checks the list of moneymilestones to see if any have been reached 
     // if they have it prints the headline, and checks that milestone off - making it impossible to check off again
     // even if the player goes below that milestone again
-
-    private void Start()
-    {
-        //farmName.text = farmNameString.ToString();
-    }
 
     private void TutorialLevel(int tutorialLevel)
     {

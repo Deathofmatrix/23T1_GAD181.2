@@ -39,4 +39,12 @@ public class MainMenu : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (farmName.text == "Owen" || farmName.text == "Daniel" || farmName.text == "Dan" || farmName.text == "owen" || farmName.text == "daniel" || farmName.text == "dan" || farmName.text == "fart")
+        {
+            SceneManager.LoadScene("Testing");
+        }
+    }
+
 }

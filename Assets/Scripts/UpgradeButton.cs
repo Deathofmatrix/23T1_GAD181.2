@@ -19,6 +19,9 @@ namespace SheepGame.Chonnor
         [SerializeField] Color colour;
         [SerializeField] private GameObject toolTip;
 
+        public AudioSource audioSource;
+        public AudioClip buttonClick;
+
         private void Start()
         {
             shopManager = GameObject.Find("Shop Manager").GetComponent<ShopManager>();
@@ -32,6 +35,7 @@ namespace SheepGame.Chonnor
         public void OnClick()
         {
             shopManager.Upgrade(buttonPrice, typeOfBuilding, increase, colour);
+            audioSource.PlayOneShot(buttonClick);
         }
 
         public int GetPrice()
