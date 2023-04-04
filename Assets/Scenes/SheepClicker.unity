@@ -5446,7 +5446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopManager: {fileID: 2063954688}
   buttonText: {fileID: 2067069144}
-  buttonName: Helper
+  buttonName: Water Tower
   buttonPrice: 50
   typeOfBuilding: 1
   increase: 1
